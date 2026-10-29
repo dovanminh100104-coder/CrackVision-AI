@@ -1,0 +1,43 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environments & Virtual Envs
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# IDE & Editor Settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*~
+Reload
+
+# Large Datasets & Archives (> 100MB GitHub limit)
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.rar
+notebook/archive.zip
+
+# Large Model Checkpoints (> 100MB GitHub limit, hosted on GitHub Releases)
+*.pth
+# Note: compact_unet_crack_segmentation.pt (~29.7MB) is retained in the repo for out-of-the-box demo functionality.
+
+# Raw 4K UHD video (> 100MB GitHub limit)
+video_crack/2048289-uhd_3840_2160_30fps.mp4
+
+# Academic reports and thesis documents (excluded as per repository specification)
+*.docx
+*.pdf
+*.pptx
+*.xlsx
+*.doc

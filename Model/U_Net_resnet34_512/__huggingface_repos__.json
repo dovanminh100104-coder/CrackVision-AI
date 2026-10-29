@@ -1,0 +1,1 @@
+{"repos": [{"repoId": "smp-hub/resnet34.imagenet", "repoType": "model", "commitHash": "7a57b34f723329ff020b3f8bc41771163c519d0c", "filePaths": ["config.json", "model.safetensors"]}]}
