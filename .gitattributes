@@ -5,25 +5,27 @@
 # 1. Force GitHub Linguist to analyze demo/ folder (by default 'demo/' is ignored as documentation)
 demo/** -linguist-documentation
 demo/** -linguist-vendored
-demo/** linguist-detectable
+demo/** linguist-detectable=true
 
 # 2. Explicitly enable core application programming languages
-*.py linguist-detectable
-*.js linguist-detectable
-*.html linguist-detectable
-*.css linguist-detectable
+*.py linguist-detectable=true
+*.js linguist-detectable=true
+*.html linguist-detectable=true
+*.css linguist-detectable=true
 
-demo/backend/*.py linguist-detectable
-demo/frontend/*.js linguist-detectable
-demo/frontend/*.html linguist-detectable
-demo/frontend/*.css linguist-detectable
-tests/*.py linguist-detectable
+demo/backend/*.py linguist-detectable=true
+demo/frontend/*.js linguist-detectable=true
+demo/frontend/*.html linguist-detectable=true
+demo/frontend/*.css linguist-detectable=true
+tests/*.py linguist-detectable=true
 
-# 3. Vendor and document heavy Jupyter Notebooks (44MB) so they do not overpower source code
+# 3. Vendor, document and hide heavy Jupyter Notebooks (44MB) from language stats
 *.ipynb linguist-documentation
 *.ipynb linguist-vendored
+*.ipynb linguist-detectable=false
 notebook/** linguist-documentation
 notebook/** linguist-vendored
+notebook/** linguist-detectable=false
 
 # 4. Vendor model outputs and images
 Model/** linguist-vendored
