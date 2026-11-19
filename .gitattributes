@@ -1,0 +1,14 @@
+# =========================================================================
+# GitHub Linguist Language Overrides
+# =========================================================================
+
+# Treat Jupyter Notebooks as documentation so they do not overpower repo language stats
+*.ipynb linguist-documentation=true
+notebook/** linguist-documentation=true
+
+# Ensure Core Web & AI Languages are accurately reflected in repository statistics
+*.py linguist-detectable=true
+*.js linguist-detectable=true
+*.html linguist-detectable=true
+*.css linguist-detectable=true
+*.bat linguist-detectable=true

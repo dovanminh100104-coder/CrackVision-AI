@@ -26,7 +26,7 @@ SQLITE_DB_FILE = os.path.join(backend_dir, "crackvision.db")
 JSON_BACKUP_FILE = os.path.join(backend_dir, "history_records.json")
 
 # Microsoft SQL Server Configuration
-MSSQL_SERVER = ".\\SQLEXPRESS01"
+MSSQL_SERVER = "."
 MSSQL_DATABASE = "CrackVisionDB"
 MSSQL_DRIVER = "ODBC Driver 17 for SQL Server"
 
@@ -62,15 +62,55 @@ def _sanitize_row(row: Dict[str, Any]) -> Dict[str, Any]:
     return sanitized
 
 def check_mssql_connection() -> bool:
-    """Check if Microsoft SQL Server (.SQLEXPRESS01) is reachable."""
+    """Check if Microsoft SQL Server is reachable, auto-detecting instance & driver."""
+    global MSSQL_SERVER, MSSQL_DRIVER, MSSQL_MASTER_CONN_STR, MSSQL_DB_CONN_STR
     if not PYODBC_AVAILABLE:
         return False
+    
+    available_drivers = pyodbc.drivers() if hasattr(pyodbc, 'drivers') else []
+    driver_candidates = [
+        "ODBC Driver 17 for SQL Server",
+        "ODBC Driver 18 for SQL Server",
+        "SQL Server"
+    ]
+    drivers_to_try = [d for d in driver_candidates if d in available_drivers] or driver_candidates
+    server_candidates = [".", "localhost", ".\\SQLEXPRESS01", ".\\SQLEXPRESS", "(local)"]
+
+    # First check current configuration
     try:
-        conn = pyodbc.connect(MSSQL_MASTER_CONN_STR, timeout=3, autocommit=True)
+        conn = pyodbc.connect(MSSQL_MASTER_CONN_STR, timeout=2, autocommit=True)
         conn.close()
         return True
     except Exception:
-        return False
+        pass
+
+    # Auto-detect available driver and server instance
+    for drv in drivers_to_try:
+        for srv in server_candidates:
+            test_str = (
+                f"DRIVER={{{drv}}};"
+                f"SERVER={srv};"
+                f"DATABASE=master;"
+                f"Trusted_Connection=yes;"
+                f"TrustServerCertificate=yes;"
+            )
+            try:
+                conn = pyodbc.connect(test_str, timeout=2, autocommit=True)
+                conn.close()
+                MSSQL_SERVER = srv
+                MSSQL_DRIVER = drv
+                MSSQL_MASTER_CONN_STR = test_str
+                MSSQL_DB_CONN_STR = (
+                    f"DRIVER={{{drv}}};"
+                    f"SERVER={srv};"
+                    f"DATABASE={MSSQL_DATABASE};"
+                    f"Trusted_Connection=yes;"
+                    f"TrustServerCertificate=yes;"
+                )
+                return True
+            except Exception:
+                continue
+    return False
 
 def get_mssql_connection():
     """Create a connection to Microsoft SQL Server CrackVisionDB."""

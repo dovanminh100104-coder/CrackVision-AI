@@ -1,62 +1,118 @@
 <!DOCTYPE html>
 <html lang="vi" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI CrackVision Pro - Hệ Thống Phân Đoạn Vết Nứt Bề Mặt Công Trình</title>
-    
+
     <!-- Google Fonts & FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Chart.js for Benchmark Visuals -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <link rel="stylesheet" href="style.css?v=4.8">
+    <link rel="stylesheet" href="style.css?v=14.0">
 </head>
+
 <body>
     <div class="app-container">
         <!-- TOP APP HEADER -->
         <header class="app-header">
             <div class="logo-group">
-                <div class="logo-icon custom-crack-logo" title="CrackVision AI - Concrete Inspection">
+                <div class="logo-icon custom-crack-logo" title="CrackVision AI - Hệ Thống Kiểm Định Vết Nứt Kết Cấu">
                     <svg viewBox="0 0 44 44" class="crack-logo-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="44" height="44" rx="10" fill="url(#logo_grad)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
-                        <!-- Structural grid crosshair ticks -->
-                        <line x1="6" y1="22" x2="10" y2="22" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
-                        <line x1="34" y1="22" x2="38" y2="22" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
-                        <line x1="22" y1="6" x2="22" y2="10" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
-                        <line x1="22" y1="34" x2="22" y2="38" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
-                        <!-- Dark fracture shadow -->
-                        <path d="M7 36 L17 23 L15 21 L25 18 L23 13 L36 7" stroke="rgba(0,0,0,0.6)" stroke-width="4" stroke-linecap="round" stroke-linejoin="bevel"/>
-                        <!-- Glowing crack fissure -->
-                        <path class="logo-crack-glow" d="M7 36 L17 23 L15 21 L25 18 L23 13 L36 7" stroke="#EF4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="bevel"/>
-                        <!-- Pure white/yellow crack core -->
-                        <path class="logo-crack-core" d="M7 36 L17 23 L15 21 L25 18 L23 13 L36 7" stroke="#FFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="bevel"/>
-                        <!-- Branching micro fissures -->
-                        <path d="M17 23 L12 28" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M25 18 L31 23" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M23 13 L27 10" stroke="#F59E0B" stroke-width="1.2" stroke-linecap="round"/>
-                        <!-- Central AI optical detection node -->
-                        <circle cx="21" cy="20" r="3.2" fill="#EF4444" stroke="#FFF" stroke-width="1.2"/>
-                        <!-- Industrial corner aperture brackets -->
-                        <path d="M10 8H7V11" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-linecap="round"/>
-                        <path d="M34 8H37V11" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-linecap="round"/>
-                        <path d="M10 36H7V33" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-linecap="round"/>
-                        <path d="M34 36H37V33" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-linecap="round"/>
                         <defs>
-                            <linearGradient id="logo_grad" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#2D231E"/>
-                                <stop offset="1" stop-color="#191311"/>
+                            <linearGradient id="logo_bg_grad" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#141A26" />
+                                <stop offset="1" stop-color="#0A0D14" />
                             </linearGradient>
+                            <linearGradient id="logo_prism_top" x1="8" y1="5" x2="36" y2="22" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#3A475C" />
+                                <stop offset="1" stop-color="#202A3B" />
+                            </linearGradient>
+                            <linearGradient id="logo_prism_left" x1="8" y1="13" x2="22" y2="39" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#141C28" />
+                                <stop offset="1" stop-color="#0A0E17" />
+                            </linearGradient>
+                            <linearGradient id="logo_prism_right" x1="22" y1="22" x2="36" y2="39" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#243144" />
+                                <stop offset="1" stop-color="#121824" />
+                            </linearGradient>
+                            <linearGradient id="logo_laser_grad" x1="10" y1="34" x2="34" y2="10" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#EF4444" />
+                                <stop offset="0.5" stop-color="#FF5722" />
+                                <stop offset="1" stop-color="#F59E0B" />
+                            </linearGradient>
+                            <filter id="logoLaserGlow" x="-30%" y="-30%" width="160%" height="160%">
+                                <feGaussianBlur stdDeviation="1.8" result="blur" />
+                                <feMerge>
+                                    <feMergeNode in="blur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
                         </defs>
+
+                        <!-- Outer Titanium Bezel Base -->
+                        <rect width="44" height="44" rx="10" fill="url(#logo_bg_grad)" stroke="rgba(255,255,255,0.16)"
+                            stroke-width="1.2" />
+
+                        <!-- 3D Isometric Structural Concrete Prism -->
+                        <polygon points="22,6 37,14.5 22,23 7,14.5" fill="url(#logo_prism_top)" />
+                        <polygon points="7,14.5 22,23 22,38 7,29.5" fill="url(#logo_prism_left)" />
+                        <polygon points="37,14.5 22,23 22,38 37,29.5" fill="url(#logo_prism_right)" />
+
+                        <!-- Precision Structural Facet Seam Vectors -->
+                        <line x1="22" y1="6" x2="22" y2="23" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" />
+                        <line x1="7" y1="14.5" x2="22" y2="23" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" />
+                        <line x1="37" y1="14.5" x2="22" y2="23" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" />
+                        <line x1="22" y1="23" x2="22" y2="38" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" />
+
+                        <!-- Optical Aperture Reticle Ring -->
+                        <circle cx="22" cy="22" r="8.5" stroke="rgba(0, 229, 255, 0.45)" stroke-width="0.9"
+                            stroke-dasharray="2.5 2" />
+                        <circle cx="22" cy="22" r="13" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.8" />
+
+                        <!-- Surgical Tectonic Laser Fracture Fissure -->
+                        <path d="M 9 32 L 17 25 L 15 22 L 23 20 L 21 15 L 35 11" stroke="rgba(0,0,0,0.85)"
+                            stroke-width="3.8" stroke-linecap="round" stroke-linejoin="bevel" />
+                        <path class="logo-crack-glow" d="M 9 32 L 17 25 L 15 22 L 23 20 L 21 15 L 35 11"
+                            stroke="url(#logo_laser_grad)" stroke-width="2.6" stroke-linecap="round"
+                            stroke-linejoin="bevel" filter="url(#logoLaserGlow)" />
+                        <path class="logo-crack-core" d="M 9 32 L 17 25 L 15 22 L 23 20 L 21 15 L 35 11"
+                            stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="bevel" />
+
+                        <!-- Branching Micro-Fissures -->
+                        <path d="M 17 25 L 13 29" stroke="#F59E0B" stroke-width="1.2" stroke-linecap="round" />
+                        <path d="M 23 20 L 28 24" stroke="#F59E0B" stroke-width="1.2" stroke-linecap="round" />
+
+                        <!-- Optical AI Inspection Node -->
+                        <circle cx="22" cy="20" r="3" fill="#EF4444" stroke="#FFFFFF" stroke-width="1.2" />
+                        <circle cx="22" cy="20" r="5" stroke="#EF4444" stroke-width="0.8" opacity="0.6" />
+
+                        <!-- CAD Corner Caliper Brackets -->
+                        <path d="M 4 8 V 4 H 8" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"
+                            stroke-linecap="round" />
+                        <path d="M 40 8 V 4 H 36" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"
+                            stroke-linecap="round" />
+                        <path d="M 4 36 V 40 H 8" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"
+                            stroke-linecap="round" />
+                        <path d="M 40 36 V 40 H 36" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"
+                            stroke-linecap="round" />
                     </svg>
                 </div>
                 <div class="logo-text">
-                    <span class="brand-name">CrackVision</span>
-                    <span class="brand-tagline" data-i18n="brand_tagline">Hệ Thống Kiểm Định Vết Nứt Bê Tông Tự Động</span>
+                    <div class="brand-title-row">
+                        <span class="brand-name">Crack<span class="brand-name-accent">Vision</span></span>
+                        <span class="brand-badge-pro"><i class="fa-solid fa-sparkles"></i> PRO AI</span>
+                    </div>
+                    <span class="brand-tagline" data-i18n="brand_tagline">Hệ Thống Kiểm Định Vết Nứt Bê Tông Tự
+                        Động</span>
                 </div>
             </div>
 
@@ -69,7 +125,8 @@
 
                 <!-- COLOR PALETTE DROPDOWN (ĐỔI MÀU SẮC GIAO DIỆN) -->
                 <div class="color-dropdown-wrapper" id="color-dropdown-wrapper">
-                    <button id="color-toggle-btn" class="color-toggle-btn" title="Đổi màu sắc chủ đạo / Change Color Palette" aria-expanded="false">
+                    <button id="color-toggle-btn" class="color-toggle-btn"
+                        title="Đổi màu sắc chủ đạo / Change Color Palette" aria-expanded="false">
                         <span class="color-dot-indicator" id="current-color-indicator"></span>
                         <span id="color-btn-label" data-i18n="theme_color_btn">Màu sắc</span>
                         <i class="fa-solid fa-angle-down color-caret"></i>
@@ -80,32 +137,38 @@
                             <span data-i18n="select_accent_color">Màu sắc chủ đạo</span>
                         </div>
                         <div class="palette-grid">
-                            <button type="button" class="palette-item active" data-color="#B4432A" data-hover="#98351F" data-name-vi="Đỏ gạch Oxit" data-name-en="Brick Oxide">
+                            <button type="button" class="palette-item active" data-color="#B4432A" data-hover="#98351F"
+                                data-name-vi="Đỏ gạch Oxit" data-name-en="Brick Oxide">
                                 <span class="palette-swatch" style="background: #B4432A;"></span>
                                 <span class="palette-item-name">Đỏ gạch Oxit</span>
                                 <i class="fa-solid fa-check check-icon"></i>
                             </button>
-                            <button type="button" class="palette-item" data-color="#2563EB" data-hover="#1D4ED8" data-name-vi="Xanh biển kỹ thuật" data-name-en="Engineering Blue">
+                            <button type="button" class="palette-item" data-color="#2563EB" data-hover="#1D4ED8"
+                                data-name-vi="Xanh biển kỹ thuật" data-name-en="Engineering Blue">
                                 <span class="palette-swatch" style="background: #2563EB;"></span>
                                 <span class="palette-item-name">Xanh biển kỹ thuật</span>
                                 <i class="fa-solid fa-check check-icon"></i>
                             </button>
-                            <button type="button" class="palette-item" data-color="#C98A2E" data-hover="#A77022" data-name-vi="Vàng đất Ochre" data-name-en="Earth Ochre">
+                            <button type="button" class="palette-item" data-color="#C98A2E" data-hover="#A77022"
+                                data-name-vi="Vàng đất Ochre" data-name-en="Earth Ochre">
                                 <span class="palette-swatch" style="background: #C98A2E;"></span>
                                 <span class="palette-item-name">Vàng đất Ochre</span>
                                 <i class="fa-solid fa-check check-icon"></i>
                             </button>
-                            <button type="button" class="palette-item" data-color="#E8622A" data-hover="#C44E1C" data-name-vi="Cam công trình" data-name-en="Safety Orange">
+                            <button type="button" class="palette-item" data-color="#E8622A" data-hover="#C44E1C"
+                                data-name-vi="Cam công trình" data-name-en="Safety Orange">
                                 <span class="palette-swatch" style="background: #E8622A;"></span>
                                 <span class="palette-item-name">Cam công trình</span>
                                 <i class="fa-solid fa-check check-icon"></i>
                             </button>
-                            <button type="button" class="palette-item" data-color="#4C7A4A" data-hover="#3C623B" data-name-vi="Xanh rêu khoáng" data-name-en="Moss Green">
+                            <button type="button" class="palette-item" data-color="#4C7A4A" data-hover="#3C623B"
+                                data-name-vi="Xanh rêu khoáng" data-name-en="Moss Green">
                                 <span class="palette-swatch" style="background: #4C7A4A;"></span>
                                 <span class="palette-item-name">Xanh rêu khoáng</span>
                                 <i class="fa-solid fa-check check-icon"></i>
                             </button>
-                            <button type="button" class="palette-item" data-color="#0284C7" data-hover="#0369A1" data-name-vi="Xanh bản vẽ CAD" data-name-en="Blueprint Cyan">
+                            <button type="button" class="palette-item" data-color="#0284C7" data-hover="#0369A1"
+                                data-name-vi="Xanh bản vẽ CAD" data-name-en="Blueprint Cyan">
                                 <span class="palette-swatch" style="background: #0284C7;"></span>
                                 <span class="palette-item-name">Xanh bản vẽ CAD</span>
                                 <i class="fa-solid fa-check check-icon"></i>
@@ -121,7 +184,8 @@
                 </button>
 
                 <div class="system-status">
-                    <span class="status-text"><span data-i18n="gpu_system">Hệ Thống GPU:</span> <strong id="gpu-status" data-i18n="gpu_status">NVIDIA CUDA</strong></span>
+                    <span class="status-text"><span data-i18n="gpu_system">Hệ Thống GPU:</span> <strong id="gpu-status"
+                            data-i18n="gpu_status">NVIDIA CUDA</strong></span>
                 </div>
             </div>
         </header>
@@ -131,30 +195,37 @@
             <!-- SIDEBAR CONTROLS -->
             <aside class="sidebar">
                 <div class="model-status-badge">
-                    <i class="fa-solid fa-check-double"></i> <span data-i18n="weights_status_badge">Trọng số Kaggle Seg03 &amp; Seg04 đã nạp</span>
+                    <i class="fa-solid fa-check-double"></i> <span data-i18n="weights_status_badge">Trọng số Kaggle
+                        Seg03 &amp; Seg04 đã nạp</span>
                 </div>
 
                 <!-- SECTION 1: CẤU HÌNH MÔ HÌNH -->
                 <div class="sidebar-section">
                     <div class="section-header">
-                        <h3><i class="fa-solid fa-sliders"></i> <span data-i18n="sec1_title">Cấu hình mô hình</span></h3>
+                        <h3><i class="fa-solid fa-sliders"></i> <span data-i18n="sec1_title">Cấu hình mô hình</span>
+                        </h3>
                     </div>
-                    
+
                     <div class="control-group">
                         <label for="algorithm-group" data-i18n="lbl_algo_group">Nhóm Thuật Toán</label>
                         <select id="algorithm-group" class="custom-select">
                             <option value="dl" data-i18n="opt_algo_dl">Học Sâu (Deep Learning Segmentation)</option>
-                            <option value="classical" data-i18n="opt_algo_classical">Xử Lý Ảnh Cổ Điển (Classical Vision)</option>
+                            <option value="classical" data-i18n="opt_algo_classical">Xử Lý Ảnh Cổ Điển (Classical
+                                Vision)</option>
                         </select>
                     </div>
 
                     <div class="control-group" id="dl-models-group">
                         <label for="model-type" data-i18n="lbl_model_arch">Kiến Trúc Mô Hình</label>
                         <select id="model-type" class="custom-select">
-                            <option value="unet_resnet34_512" data-i18n="opt_unet_resnet34_512" selected>U-Net ResNet-34 (512x512 - Đề xuất)</option>
-                            <option value="deeplabv3_finetuned" data-i18n="opt_deeplabv3_finetuned">DeepLabV3+ (Fine-Tuned)</option>
-                            <option value="deeplabv3_frozen" data-i18n="opt_deeplabv3_frozen">DeepLabV3+ (Frozen Backbone)</option>
-                            <option value="compact_unet" data-i18n="opt_compact_unet">Compact U-Net (Seg03 Scratch)</option>
+                            <option value="unet_resnet34_512" data-i18n="opt_unet_resnet34_512" selected>U-Net ResNet-34
+                                (512x512 - Đề xuất)</option>
+                            <option value="deeplabv3_finetuned" data-i18n="opt_deeplabv3_finetuned">DeepLabV3+
+                                (Fine-Tuned)</option>
+                            <option value="deeplabv3_frozen" data-i18n="opt_deeplabv3_frozen">DeepLabV3+ (Frozen
+                                Backbone)</option>
+                            <option value="compact_unet" data-i18n="opt_compact_unet">Compact U-Net (Seg03 Scratch)
+                            </option>
                             <option value="deeplabv3plus" style="display:none;">DeepLabV3+ (Alias)</option>
                             <option value="resunet34" style="display:none;">ResUNet-34 (Alias)</option>
                         </select>
@@ -169,64 +240,95 @@
                     </div>
 
                     <div class="control-group">
-                        <label><span data-i18n="lbl_resolution">Độ Phân Giải Đầu Vào:</span> <span id="res-val" class="value-badge">256 x 256</span></label>
-                        <input type="range" id="img-size" min="256" max="512" step="128" value="256" class="custom-slider">
+                        <label><span data-i18n="lbl_resolution">Độ Phân Giải Đầu Vào:</span> <span id="res-val"
+                                class="value-badge">256 x 256</span></label>
+                        <input type="range" id="img-size" min="256" max="512" step="128" value="256"
+                            class="custom-slider">
                     </div>
 
                     <div class="control-group">
-                        <label><span data-i18n="lbl_threshold">Ngưỡng Nhận Dạng (Threshold):</span> <span id="thresh-val" class="value-badge">0.50</span></label>
-                        <input type="range" id="threshold" min="0.10" max="0.90" step="0.05" value="0.50" class="custom-slider">
+                        <label><span data-i18n="lbl_threshold">Ngưỡng Nhận Dạng (Threshold):</span> <span
+                                id="thresh-val" class="value-badge">0.50</span></label>
+                        <input type="range" id="threshold" min="0.10" max="0.90" step="0.05" value="0.50"
+                            class="custom-slider">
                     </div>
                 </div>
 
                 <!-- SECTION 2: TÙY CHỌN HIỂN THỊ OVERLAY -->
                 <div class="sidebar-section">
                     <div class="section-header">
-                        <h3><i class="fa-solid fa-layer-group"></i> <span data-i18n="sec2_title">Hiển thị phủ màu</span></h3>
+                        <h3><i class="fa-solid fa-layer-group"></i> <span data-i18n="sec2_title">Hiển thị phủ màu</span>
+                        </h3>
                     </div>
-                    
+
                     <div class="control-group">
                         <label data-i18n="lbl_overlay_color">Màu Phủ Vết Nứt (Overlay Color)</label>
                         <div class="color-picker-grid">
-                            <button class="color-btn active" data-color="#EF4444" style="background:#EF4444;" title="Đỏ Cảnh Báo"></button>
-                            <button class="color-btn" data-color="#10B981" style="background:#10B981;" title="Xanh Lục"></button>
-                            <button class="color-btn" data-color="#06B6D4" style="background:#06B6D4;" title="Xanh Cyan"></button>
-                            <button class="color-btn" data-color="#F59E0B" style="background:#F59E0B;" title="Vàng Cam"></button>
-                            <button class="color-btn" data-color="#EC4899" style="background:#EC4899;" title="Hồng Neon"></button>
+                            <button class="color-btn active" data-color="#EF4444" style="background:#EF4444;"
+                                title="Đỏ Cảnh Báo"></button>
+                            <button class="color-btn" data-color="#10B981" style="background:#10B981;"
+                                title="Xanh Lục"></button>
+                            <button class="color-btn" data-color="#06B6D4" style="background:#06B6D4;"
+                                title="Xanh Cyan"></button>
+                            <button class="color-btn" data-color="#F59E0B" style="background:#F59E0B;"
+                                title="Vàng Cam"></button>
+                            <button class="color-btn" data-color="#EC4899" style="background:#EC4899;"
+                                title="Hồng Neon"></button>
                         </div>
                     </div>
 
                     <div class="control-group">
-                        <label><span data-i18n="lbl_opacity">Độ Trong Suốt (Opacity):</span> <span id="opacity-val" class="value-badge">55%</span></label>
-                        <input type="range" id="opacity" min="0.1" max="1.0" step="0.05" value="0.55" class="custom-slider">
+                        <label><span data-i18n="lbl_opacity">Độ Trong Suốt (Opacity):</span> <span id="opacity-val"
+                                class="value-badge">55%</span></label>
+                        <input type="range" id="opacity" min="0.1" max="1.0" step="0.05" value="0.55"
+                            class="custom-slider">
                     </div>
                 </div>
 
                 <!-- SECTION 3: NẠP TRỌNG SỐ TÙY CHỈNH -->
                 <div class="sidebar-section">
                     <div class="section-header">
-                        <h3><i class="fa-solid fa-file-arrow-up"></i> <span data-i18n="sec3_title">Nạp trọng số mô hình</span></h3>
+                        <h3><i class="fa-solid fa-file-arrow-up"></i> <span data-i18n="sec3_title">Nạp trọng số mô
+                                hình</span></h3>
                     </div>
                     <div class="file-upload-small">
                         <input type="file" id="pth-file" accept=".pth,.pt">
                         <label for="pth-file" class="small-upload-label">
-                            <i class="fa-solid fa-file-code"></i> <span id="pth-name" data-i18n="lbl_upload_pth">Nạp tệp .pth tùy chỉnh</span>
+                            <i class="fa-solid fa-file-code"></i> <span id="pth-name" data-i18n="lbl_upload_pth">Nạp tệp
+                                .pth tùy chỉnh</span>
                         </label>
                     </div>
                 </div>
             </aside>
 
             <main class="workspace">
-                <!-- NAV TABS -->
-                <nav class="nav-tabs">
-                    <button class="tab-btn active" data-tab="tab-dashboard"><i class="fa-solid fa-chart-pie"></i> <span data-i18n="tab_dashboard">Tổng Quan Dashboard</span></button>
-                    <button class="tab-btn" data-tab="tab-image"><i class="fa-solid fa-image"></i> <span data-i18n="tab_image">Phân Tích Ảnh</span></button>
-                    <button class="tab-btn" data-tab="tab-video"><i class="fa-solid fa-video"></i> <span data-i18n="tab_video">Phân Tích Video</span></button>
-                    <button class="tab-btn" data-tab="tab-camera"><i class="fa-solid fa-camera"></i> <span data-i18n="tab_camera">Camera Trực Tiếp</span></button>
-                    <button class="tab-btn" data-tab="tab-benchmark"><i class="fa-solid fa-chart-column"></i> <span data-i18n="tab_benchmark">So Sánh Mô Hình</span></button>
-                    <button class="tab-btn" data-tab="tab-history"><i class="fa-solid fa-clock-rotate-left"></i> <span data-i18n="tab_history">Lịch Sử Kiểm Định</span></button>
-                    <button class="tab-btn" data-tab="tab-about"><i class="fa-solid fa-circle-info"></i> <span data-i18n="tab_about">Giới Thiệu Đề Tài</span></button>
-                </nav>
+                <!-- NAV TABS WITH DESIGNER HORIZONTAL SCROLLBAR & CONTROLS -->
+                <div class="nav-tabs-wrapper">
+                    <button type="button" class="nav-scroll-btn nav-scroll-left" id="nav-scroll-left"
+                        title="Cuộn sang trái" aria-label="Cuộn sang trái">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <nav class="nav-tabs" id="main-nav-tabs">
+                        <button class="tab-btn active" data-tab="tab-dashboard"><i class="fa-solid fa-chart-pie"></i>
+                            <span data-i18n="tab_dashboard">Tổng Quan Dashboard</span></button>
+                        <button class="tab-btn" data-tab="tab-image"><i class="fa-solid fa-image"></i> <span
+                                data-i18n="tab_image">Phân Tích Ảnh</span></button>
+                        <button class="tab-btn" data-tab="tab-video"><i class="fa-solid fa-video"></i> <span
+                                data-i18n="tab_video">Phân Tích Video</span></button>
+                        <button class="tab-btn" data-tab="tab-camera"><i class="fa-solid fa-camera"></i> <span
+                                data-i18n="tab_camera">Camera Trực Tiếp</span></button>
+                        <button class="tab-btn" data-tab="tab-benchmark"><i class="fa-solid fa-chart-column"></i> <span
+                                data-i18n="tab_benchmark">So Sánh Mô Hình</span></button>
+                        <button class="tab-btn" data-tab="tab-history"><i class="fa-solid fa-clock-rotate-left"></i>
+                            <span data-i18n="tab_history">Lịch Sử Kiểm Định</span></button>
+                        <button class="tab-btn" data-tab="tab-about"><i class="fa-solid fa-circle-info"></i> <span
+                                data-i18n="tab_about">Giới Thiệu Đề Tài</span></button>
+                    </nav>
+                    <button type="button" class="nav-scroll-btn nav-scroll-right" id="nav-scroll-right"
+                        title="Cuộn sang phải" aria-label="Cuộn sang phải">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
 
                 <!-- TAB 0: EXECUTIVE DASHBOARD (TỔNG QUAN HỆ THỐNG & SỐ LIỆU DỰ ÁN) -->
                 <section id="tab-dashboard" class="tab-content active">
@@ -238,16 +340,18 @@
                                 <span data-i18n="dash_live_badge">HỆ THỐNG TRỰC TUYẾN &bull; THỜI GIAN THỰC</span>
                             </div>
                             <h2 class="dash-hero-title">
-                                <i class="fa-solid fa-gauge-high text-accent"></i> 
+                                <i class="fa-solid fa-gauge-high text-accent"></i>
                                 <span data-i18n="dash_hero_title">Trung Tâm Giám Sát &amp; Tổng Quan Dự Án</span>
                             </h2>
                             <p class="dash-hero-desc" data-i18n="dash_hero_desc">
-                                Bảng điều khiển trực quan hóa thời gian thực về dữ liệu kiểm định kết cấu công trình, các chỉ số mô hình học sâu và tình trạng cơ sở dữ liệu SQL Server.
+                                Bảng điều khiển trực quan hóa thời gian thực về dữ liệu kiểm định kết cấu công trình,
+                                các chỉ số mô hình học sâu và tình trạng cơ sở dữ liệu SQL Server.
                             </p>
                         </div>
 
                         <div class="dash-hero-actions">
-                            <div class="dash-status-pill" id="dash-db-pill" title="Trạng thái kết nối cơ sở dữ liệu quan hệ">
+                            <div class="dash-status-pill" id="dash-db-pill"
+                                title="Trạng thái kết nối cơ sở dữ liệu quan hệ">
                                 <i class="fa-solid fa-database text-success"></i>
                                 <div class="dash-status-text">
                                     <small data-i18n="dash_db_engine_lbl">Database Engine</small>
@@ -261,7 +365,8 @@
                                     <strong id="dash-model-name">U-Net ResNet-34 (512×512)</strong>
                                 </div>
                             </div>
-                            <button id="btn-refresh-dashboard" class="btn-dash-action" title="Làm mới toàn bộ số liệu và biểu đồ">
+                            <button id="btn-refresh-dashboard" class="btn-dash-action"
+                                title="Làm mới toàn bộ số liệu và biểu đồ">
                                 <i class="fa-solid fa-arrows-rotate"></i>
                                 <span data-i18n="btn_refresh_dashboard">Cập Nhật Số Liệu</span>
                             </button>
@@ -272,20 +377,26 @@
                     <div class="dash-scanner-showcase glass-card">
                         <div class="scanner-header">
                             <div class="scanner-title-group">
-                                <span class="scanner-live-badge"><i class="fa-solid fa-crosshairs fa-spin"></i> <span data-i18n="scanner_live_badge">MÔ PHỎNG QUÉT VẾT NỨT HIỆN TRƯỜNG</span></span>
-                                <h3 class="scanner-title" data-i18n="scanner_title">Hệ Thống Quét Laser Phân Đoạn &amp; Khoanh Vùng Vết Nứt Tự Động</h3>
-                                <p class="scanner-desc" data-i18n="scanner_desc">Mô phỏng luồng suy luận quang học của U-Net ResNet-34 độ phân giải 512×512, bắt trọn vi nứt tế vi dưới 0.20mm.</p>
+                                <span class="scanner-live-badge"><i class="fa-solid fa-crosshairs fa-spin"></i> <span
+                                        data-i18n="scanner_live_badge">MÔ PHỎNG QUÉT VẾT NỨT HIỆN TRƯỜNG</span></span>
+                                <h3 class="scanner-title" data-i18n="scanner_title">Hệ Thống Quét Laser Phân Đoạn &amp;
+                                    Khoanh Vùng Vết Nứt Tự Động</h3>
+                                <p class="scanner-desc" data-i18n="scanner_desc">Mô phỏng luồng suy luận quang học của
+                                    U-Net ResNet-34 độ phân giải 512×512, bắt trọn vi nứt tế vi dưới 0.20mm.</p>
                             </div>
 
                             <!-- Interactive Visual Mode Selector -->
                             <div class="scanner-mode-switch">
-                                <button type="button" class="scan-mode-btn active" data-mode="all" id="btn-scan-all" title="Xem tổng thể luồng phân đoạn AI và quét laser">
+                                <button type="button" class="scan-mode-btn active" data-mode="all" id="btn-scan-all"
+                                    title="Xem tổng thể luồng phân đoạn AI và quét laser">
                                     <i class="fa-solid fa-layer-group"></i> <span>Toàn Diện</span>
                                 </button>
-                                <button type="button" class="scan-mode-btn" data-mode="mask" id="btn-scan-mask" title="Chỉ xem mặt nạ phân đoạn 0/255">
+                                <button type="button" class="scan-mode-btn" data-mode="mask" id="btn-scan-mask"
+                                    title="Chỉ xem mặt nạ phân đoạn 0/255">
                                     <i class="fa-solid fa-draw-polygon"></i> <span>Mặt Nạ Mask</span>
                                 </button>
-                                <button type="button" class="scan-mode-btn" data-mode="stress" id="btn-scan-stress" title="Xem bản đồ gradient ứng suất bê tông">
+                                <button type="button" class="scan-mode-btn" data-mode="stress" id="btn-scan-stress"
+                                    title="Xem bản đồ gradient ứng suất bê tông">
                                     <i class="fa-solid fa-fire-flame-curved"></i> <span>Ứng Suất</span>
                                 </button>
                             </div>
@@ -293,7 +404,8 @@
                             <div class="scanner-quick-stats">
                                 <div class="hud-stat-box">
                                     <span class="hud-lbl">Tốc độ quét</span>
-                                    <span class="hud-val text-success" id="scanner-stat-fps">34.5 FPS <i class="fa-solid fa-wave-square"></i></span>
+                                    <span class="hud-val text-success" id="scanner-stat-fps">34.5 FPS <i
+                                            class="fa-solid fa-wave-square"></i></span>
                                 </div>
                                 <div class="hud-stat-box">
                                     <span class="hud-lbl">Độ chính xác</span>
@@ -309,7 +421,13 @@
                         <div class="scanner-viewport" id="scanner-viewport-box">
                             <!-- Photorealistic Concrete Wall Surface Texture -->
                             <div class="concrete-wall-texture"></div>
-                            
+
+                            <!-- CAD Origin Datum Marker -->
+                            <div class="cad-origin-datum">
+                                <span class="datum-crosshair">⊕</span>
+                                <span class="datum-text">DATUM [0,0,0] &bull; REF: SLAB-B4 &bull; 635nm LIDAR</span>
+                            </div>
+
                             <!-- Engineering Coordinate Ticks & Rulers -->
                             <div class="scanner-ruler-top">
                                 <span>0mm</span><span>64mm</span><span>128mm</span><span>192mm</span><span>256mm</span><span>320mm</span><span>384mm</span><span>448mm</span><span>512mm</span>
@@ -322,65 +440,76 @@
                             <div class="stress-heatmap-layer"></div>
 
                             <!-- Realistic Concrete Crack Fracture Network (SVG) -->
-                            <svg class="scanner-crack-svg" viewBox="0 0 920 220" preserveAspectRatio="none">
+                            <svg class="scanner-crack-svg" viewBox="0 0 920 200" preserveAspectRatio="none">
                                 <defs>
-                                    <!-- Neon Red Laser Crack Glow -->
+                                    <!-- Neon Red-Orange Laser Crack Glow -->
                                     <filter id="crackLaserGlow" x="-20%" y="-20%" width="140%" height="140%">
-                                        <feGaussianBlur stdDeviation="3.5" result="blur"/>
+                                        <feGaussianBlur stdDeviation="3.2" result="blur" />
                                         <feMerge>
-                                            <feMergeNode in="blur"/>
-                                            <feMergeNode in="blur"/>
-                                            <feMergeNode in="SourceGraphic"/>
+                                            <feMergeNode in="blur" />
+                                            <feMergeNode in="blur" />
+                                            <feMergeNode in="SourceGraphic" />
                                         </feMerge>
                                     </filter>
                                     <!-- Stress Field Gradient -->
                                     <linearGradient id="stressGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                        <stop offset="0%" stop-color="rgba(239, 68, 68, 0.25)"/>
-                                        <stop offset="45%" stop-color="rgba(245, 158, 11, 0.35)"/>
-                                        <stop offset="70%" stop-color="rgba(239, 68, 68, 0.3)"/>
-                                        <stop offset="100%" stop-color="rgba(239, 68, 68, 0.15)"/>
+                                        <stop offset="0%" stop-color="rgba(239, 68, 68, 0.22)" />
+                                        <stop offset="30%" stop-color="rgba(245, 158, 11, 0.32)" />
+                                        <stop offset="65%" stop-color="rgba(239, 68, 68, 0.35)" />
+                                        <stop offset="100%" stop-color="rgba(245, 158, 11, 0.20)" />
+                                    </linearGradient>
+                                    <linearGradient id="crackLaserGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#EF4444" />
+                                        <stop offset="45%" stop-color="#FF5722" />
+                                        <stop offset="75%" stop-color="#EF4444" />
+                                        <stop offset="100%" stop-color="#F59E0B" />
                                     </linearGradient>
                                 </defs>
 
                                 <!-- AI Segmentation Polygon Mask (Semi-transparent filled region) -->
                                 <polygon class="crack-polygon-mask" points="
-                                    25,108 85,123 155,98 215,118 295,93 375,138 465,108 555,148 645,118 735,148 815,123 885,103
-                                    885,115 815,135 735,160 645,130 555,160 465,120 375,150 295,105 215,130 155,110 85,135 25,120
+                                    25,98 90,108 165,86 235,102 315,80 390,124 475,96 565,134 655,104 740,134 820,110 890,92
+                                    890,104 820,122 740,146 655,116 565,146 475,108 390,136 315,92 235,114 165,98 90,120 25,110
                                 " fill="url(#stressGrad)" />
 
                                 <!-- Shadow Layer for Real Concrete Fracture Depth -->
                                 <path class="crack-path-shadow" d="
-                                    M 25,114 L 85,129 L 155,104 L 215,124 L 295,99 L 375,144 L 465,114 L 555,154 L 645,124 L 735,154 L 815,129 L 885,109
+                                    M 25,104 Q 58,110 90,114 T 165,92 T 235,108 T 315,86 T 390,130 T 475,102 T 565,140 T 655,110 T 740,140 T 820,116 T 890,98
                                 " />
 
-                                <!-- Main Concrete Jagged Crack Line (Red Neon Glow) -->
+                                <!-- Main Concrete Jagged Crack Line (Laser Optical Emission) -->
                                 <path class="crack-path-glow" filter="url(#crackLaserGlow)" d="
-                                    M 25,114 L 85,129 L 155,104 L 215,124 L 295,99 L 375,144 L 465,114 L 555,154 L 645,124 L 735,154 L 815,129 L 885,109
-                                " />
+                                    M 25,104 Q 58,110 90,114 T 165,92 T 235,108 T 315,86 T 390,130 T 475,102 T 565,140 T 655,110 T 740,140 T 820,116 T 890,98
+                                " stroke="url(#crackLaserGrad)" />
 
-                                <!-- Intense White Core of the Fracture -->
+                                <!-- Intense Pure White Hot Core of Fracture -->
                                 <path class="crack-path-core" d="
-                                    M 25,114 L 85,129 L 155,104 L 215,124 L 295,99 L 375,144 L 465,114 L 555,154 L 645,124 L 735,154 L 815,129 L 885,109
+                                    M 25,104 Q 58,110 90,114 T 165,92 T 235,108 T 315,86 T 390,130 T 475,102 T 565,140 T 655,110 T 740,140 T 820,116 T 890,98
                                 " />
 
                                 <!-- Realistic Secondary Branching Micro-Fissures -->
-                                <path class="crack-branch-path" d="M 155,104 L 185,74 L 210,64" />
-                                <path class="crack-branch-path" d="M 215,124 L 245,164 L 275,184" />
-                                <path class="crack-branch-path" d="M 375,144 L 410,184 L 435,199" />
-                                <path class="crack-branch-path" d="M 465,114 L 495,79 L 525,59" />
-                                <path class="crack-branch-path" d="M 645,124 L 675,84 L 705,69" />
-                                <path class="crack-branch-path" d="M 735,154 L 765,189 L 795,199" />
-                                <path class="crack-branch-path" d="M 815,129 L 845,94 L 870,84" />
+                                <path class="crack-branch-path" d="M 165,92 Q 185,72 210,58" />
+                                <path class="crack-branch-path" d="M 235,108 Q 260,138 285,155" />
+                                <path class="crack-branch-path" d="M 390,130 Q 420,160 445,175" />
+                                <path class="crack-branch-path" d="M 475,102 Q 505,75 530,56" />
+                                <path class="crack-branch-path" d="M 655,110 Q 680,78 710,64" />
+                                <path class="crack-branch-path" d="M 740,140 Q 770,168 800,178" />
+
+                                <!-- Delicate Hairline Micro-Crazing (<0.15mm detection) -->
+                                <path class="crack-hairline-path" d="M 185,72 L 200,66" />
+                                <path class="crack-hairline-path" d="M 260,138 L 270,148" />
+                                <path class="crack-hairline-path" d="M 505,75 L 520,68" />
+                                <path class="crack-hairline-path" d="M 770,168 L 785,175" />
 
                                 <!-- AI Target Defect Detection Nodes (Pulsing Centers) -->
-                                <circle class="crack-node node-1" cx="215" cy="124" r="5" />
-                                <circle class="crack-node node-2" cx="465" cy="114" r="5" />
-                                <circle class="crack-node node-3" cx="735" cy="154" r="5" />
+                                <circle class="crack-node node-1" cx="235" cy="108" r="4.5" />
+                                <circle class="crack-node node-2" cx="475" cy="102" r="4.5" />
+                                <circle class="crack-node node-3" cx="740" cy="140" r="4.5" />
 
                                 <!-- Target Measurement Reticle Indicators around Nodes -->
-                                <circle class="crack-reticle reticle-1" cx="215" cy="124" r="16" />
-                                <circle class="crack-reticle reticle-2" cx="465" cy="114" r="16" />
-                                <circle class="crack-reticle reticle-3" cx="735" cy="154" r="16" />
+                                <circle class="crack-reticle reticle-1" cx="235" cy="108" r="15" />
+                                <circle class="crack-reticle reticle-2" cx="475" cy="102" r="15" />
+                                <circle class="crack-reticle reticle-3" cx="740" cy="140" r="15" />
                             </svg>
 
                             <!-- High-Intensity Sweeping Laser & LiDAR Beam -->
@@ -393,34 +522,44 @@
                                 <div class="laser-emitter emitter-bottom"></div>
                                 <div class="laser-tag">
                                     <i class="fa-solid fa-radar fa-spin"></i>
-                                    <span id="laser-tag-text">AI 512×512</span>
-                                    <span class="laser-coord" id="laser-coord-display">X: 256mm</span>
+                                    <span id="laser-tag-text">AI 512×512 NATIVE</span>
+                                    <span class="laser-coord" id="laser-coord-display">X: 256.0mm</span>
                                 </div>
                             </div>
 
                             <!-- AI Detection Bounding Boxes with Engineering Corners -->
                             <div class="scanner-box box-1">
-                                <div class="box-corner corner-tl"></div><div class="box-corner corner-tr"></div>
-                                <div class="box-corner corner-bl"></div><div class="box-corner corner-br"></div>
-                                <span class="box-tag">K1: Nứt dọc &bull; 0.22mm &bull; 98.4%</span>
+                                <div class="box-corner corner-tl"></div>
+                                <div class="box-corner corner-tr"></div>
+                                <div class="box-corner corner-bl"></div>
+                                <div class="box-corner corner-br"></div>
+                                <span class="box-tag tag-danger"><i class="fa-solid fa-triangle-exclamation"></i> K1: Nứt dọc &bull; 0.22mm &bull; 98.4%</span>
                             </div>
                             <div class="scanner-box box-2">
-                                <div class="box-corner corner-tl"></div><div class="box-corner corner-tr"></div>
-                                <div class="box-corner corner-bl"></div><div class="box-corner corner-br"></div>
-                                <span class="box-tag">K2: Nhánh cắt &bull; 0.17mm &bull; 96.9%</span>
+                                <div class="box-corner corner-tl"></div>
+                                <div class="box-corner corner-tr"></div>
+                                <div class="box-corner corner-bl"></div>
+                                <div class="box-corner corner-br"></div>
+                                <span class="box-tag tag-warning"><i class="fa-solid fa-code-branch"></i> K2: Nhánh cắt &bull; 0.17mm &bull; 96.9%</span>
                             </div>
                             <div class="scanner-box box-3">
-                                <div class="box-corner corner-tl"></div><div class="box-corner corner-tr"></div>
-                                <div class="box-corner corner-bl"></div><div class="box-corner corner-br"></div>
-                                <span class="box-tag">K3: Nứt sâu &bull; 0.31mm &bull; 99.2%</span>
+                                <div class="box-corner corner-tl"></div>
+                                <div class="box-corner corner-tr"></div>
+                                <div class="box-corner corner-bl"></div>
+                                <div class="box-corner corner-br"></div>
+                                <span class="box-tag tag-danger"><i class="fa-solid fa-radiation"></i> K3: Nứt sâu &bull; 0.31mm &bull; 99.2%</span>
                             </div>
 
                             <!-- Real-time HUD Telemetry Footer -->
                             <div class="scanner-bottom-hud">
-                                <div class="hud-item"><span class="hud-dot bg-safe"></span> <span id="scanner-hud-stream">CAM-512 NATIVE STREAM</span></div>
-                                <div class="hud-item"><span class="hud-dot bg-warning"></span> <span id="scanner-hud-encoder">U-NET RESNET-34 ENCODER</span></div>
-                                <div class="hud-item"><span class="hud-dot bg-danger"></span> <span id="scanner-hud-latency">INFERENCE LATENCY: 28.9ms</span></div>
-                                <div class="hud-item"><span class="hud-dot bg-info"></span> <span id="scanner-hud-loss">LOSS: BCE + DICE (CLASS BALANCE)</span></div>
+                                <div class="hud-item"><span class="hud-dot bg-safe"></span> <span
+                                        id="scanner-hud-stream">CAM-512 NATIVE STREAM (FLIR 4K)</span></div>
+                                <div class="hud-item"><span class="hud-dot bg-warning"></span> <span
+                                        id="scanner-hud-encoder">U-NET RESNET-34 ENCODER</span></div>
+                                <div class="hud-item"><span class="hud-dot bg-danger"></span> <span
+                                        id="scanner-hud-latency">INFERENCE LATENCY: 28.9ms</span></div>
+                                <div class="hud-item"><span class="hud-dot bg-info"></span> <span
+                                        id="scanner-hud-loss">TCVN 9343:2012 COMPLIANCE</span></div>
                             </div>
                         </div>
                     </div>
@@ -438,7 +577,8 @@
                                     <span class="kpi-number" id="dash-kpi-total-val">0</span>
                                     <span class="kpi-unit">phiên</span>
                                 </div>
-                                <span class="kpi-sub" id="dash-kpi-total-sub" data-i18n="dash_kpi_total_sub">Đồng bộ hai chiều SQL Server</span>
+                                <span class="kpi-sub" id="dash-kpi-total-sub" data-i18n="dash_kpi_total_sub">Đồng bộ hai
+                                    chiều SQL Server</span>
                             </div>
                         </div>
 
@@ -452,7 +592,8 @@
                                 <div class="kpi-value-row">
                                     <span class="kpi-model-badge" id="dash-kpi-model-val">U-Net ResNet-34</span>
                                 </div>
-                                <span class="kpi-sub" id="dash-kpi-model-sub"><strong class="text-accent">mIoU 58.39%</strong> &bull; Dice 73.36%</span>
+                                <span class="kpi-sub" id="dash-kpi-model-sub"><strong class="text-accent">mIoU
+                                        58.39%</strong> &bull; Dice 73.36%</span>
                             </div>
                         </div>
 
@@ -467,7 +608,8 @@
                                     <span class="kpi-number" id="dash-kpi-fps-val">34.5</span>
                                     <span class="kpi-unit">FPS</span>
                                 </div>
-                                <span class="kpi-sub" data-i18n="dash_kpi_fps_sub">Độ trễ 28.9 ms (Vượt chuẩn 30 FPS)</span>
+                                <span class="kpi-sub" data-i18n="dash_kpi_fps_sub">Độ trễ 28.9 ms (Vượt chuẩn 30
+                                    FPS)</span>
                             </div>
                         </div>
 
@@ -512,7 +654,8 @@
                                     <span class="kpi-number" id="dash-kpi-dataset-val">11298</span>
                                     <span class="kpi-unit">ảnh</span>
                                 </div>
-                                <span class="kpi-sub" data-i18n="dash_kpi_dataset_sub">Crack Segmentation Dataset (Kaggle)</span>
+                                <span class="kpi-sub" data-i18n="dash_kpi_dataset_sub">Crack Segmentation Dataset
+                                    (Kaggle)</span>
                             </div>
                         </div>
                     </div>
@@ -524,10 +667,11 @@
                             <div class="dash-chart-header">
                                 <div>
                                     <h3 class="dash-chart-title">
-                                        <i class="fa-solid fa-chart-pie text-accent"></i> 
+                                        <i class="fa-solid fa-chart-pie text-accent"></i>
                                         <span data-i18n="dash_chart_risk_title">Phân Bố Mức Độ Rủi Ro Kết Cấu</span>
                                     </h3>
-                                    <p class="dash-chart-sub" data-i18n="dash_chart_risk_sub">Tỷ lệ các phiên kiểm định theo cấp độ nguy cơ (An toàn, Cảnh báo, Nguy hiểm)</p>
+                                    <p class="dash-chart-sub" data-i18n="dash_chart_risk_sub">Tỷ lệ các phiên kiểm định
+                                        theo cấp độ nguy cơ (An toàn, Cảnh báo, Nguy hiểm)</p>
                                 </div>
                                 <span class="dash-card-tag" id="dash-risk-total-tag">0 phiên</span>
                             </div>
@@ -558,10 +702,12 @@
                             <div class="dash-chart-header">
                                 <div>
                                     <h3 class="dash-chart-title">
-                                        <i class="fa-solid fa-chart-line text-warning"></i> 
-                                        <span data-i18n="dash_chart_trend_title">Diễn Biến Mật Độ Vết Nứt Qua Các Phiên</span>
+                                        <i class="fa-solid fa-chart-line text-warning"></i>
+                                        <span data-i18n="dash_chart_trend_title">Diễn Biến Mật Độ Vết Nứt Qua Các
+                                            Phiên</span>
                                     </h3>
-                                    <p class="dash-chart-sub" data-i18n="dash_chart_trend_sub">Mật độ khuyết tật (%) và thời gian xử lý AI (ms) của các đợt kiểm định gần đây</p>
+                                    <p class="dash-chart-sub" data-i18n="dash_chart_trend_sub">Mật độ khuyết tật (%) và
+                                        thời gian xử lý AI (ms) của các đợt kiểm định gần đây</p>
                                 </div>
                                 <span class="dash-card-tag" data-i18n="dash_timeline_tag">Thời gian thực</span>
                             </div>
@@ -578,10 +724,12 @@
                             <div class="dash-chart-header">
                                 <div>
                                     <h3 class="dash-chart-title">
-                                        <i class="fa-solid fa-compass-drafting text-info"></i> 
-                                        <span data-i18n="dash_chart_radar_title">Đối Sánh Đa Tiêu Chí 3 Kiến Trúc Mô Hình</span>
+                                        <i class="fa-solid fa-compass-drafting text-info"></i>
+                                        <span data-i18n="dash_chart_radar_title">Đối Sánh Đa Tiêu Chí 3 Kiến Trúc Mô
+                                            Hình</span>
                                     </h3>
-                                    <p class="dash-chart-sub" data-i18n="dash_chart_radar_sub">So sánh U-Net ResNet-34 vs DeepLabV3+ vs Compact U-Net trên 5 trục kỹ thuật</p>
+                                    <p class="dash-chart-sub" data-i18n="dash_chart_radar_sub">So sánh U-Net ResNet-34
+                                        vs DeepLabV3+ vs Compact U-Net trên 5 trục kỹ thuật</p>
                                 </div>
                                 <span class="dash-card-tag">Benchmark</span>
                             </div>
@@ -595,10 +743,11 @@
                             <div class="dash-chart-header">
                                 <div>
                                     <h3 class="dash-chart-title">
-                                        <i class="fa-solid fa-camera-rotate text-purple"></i> 
+                                        <i class="fa-solid fa-camera-rotate text-purple"></i>
                                         <span data-i18n="dash_chart_source_title">Cơ Cấu Phương Thức Kiểm Định</span>
                                     </h3>
-                                    <p class="dash-chart-sub" data-i18n="dash_chart_source_sub">Phân bố số lượng kiểm tra giữa Ảnh tĩnh, Video công trình và Camera trực tiếp</p>
+                                    <p class="dash-chart-sub" data-i18n="dash_chart_source_sub">Phân bố số lượng kiểm
+                                        tra giữa Ảnh tĩnh, Video công trình và Camera trực tiếp</p>
                                 </div>
                                 <span class="dash-card-tag" id="dash-source-total-tag">0 lượt</span>
                             </div>
@@ -613,10 +762,11 @@
                         <div class="dash-activity-header">
                             <div>
                                 <h3 class="dash-chart-title">
-                                    <i class="fa-solid fa-clock-rotate-left text-accent"></i> 
+                                    <i class="fa-solid fa-clock-rotate-left text-accent"></i>
                                     <span data-i18n="dash_feed_title">Hoạt Động Kiểm Định Vừa Thực Hiện</span>
                                 </h3>
-                                <p class="dash-chart-sub" data-i18n="dash_feed_sub">5 bản ghi kiểm định kết cấu mới nhất được lưu trong cơ sở dữ liệu</p>
+                                <p class="dash-chart-sub" data-i18n="dash_feed_sub">5 bản ghi kiểm định kết cấu mới nhất
+                                    được lưu trong cơ sở dữ liệu</p>
                             </div>
                             <button id="btn-dash-view-all-history" class="btn-sample-outline">
                                 <i class="fa-solid fa-list-ul"></i>
@@ -650,28 +800,32 @@
                             <div class="pillar-icon"><i class="fa-solid fa-expand"></i></div>
                             <div class="pillar-body">
                                 <h4 data-i18n="pillar1_title">Độ Phân Giải 512×512 Native</h4>
-                                <p data-i18n="pillar1_desc">Bảo toàn nguyên vẹn nhánh nứt tế vi dưới 0.2mm, tránh thất thoát thông tin biên khi resize về 256×256.</p>
+                                <p data-i18n="pillar1_desc">Bảo toàn nguyên vẹn nhánh nứt tế vi dưới 0.2mm, tránh thất
+                                    thoát thông tin biên khi resize về 256×256.</p>
                             </div>
                         </div>
                         <div class="dash-pillar-card">
                             <div class="pillar-icon"><i class="fa-solid fa-scale-balanced"></i></div>
                             <div class="pillar-body">
                                 <h4 data-i18n="pillar2_title">Hàm Mất Mát Kết Hợp BCE + Dice</h4>
-                                <p data-i18n="pillar2_desc">Giải quyết triệt để mất cân bằng mẫu cực đoan khi điểm ảnh vết nứt chỉ chiếm 1% - 5% tổng bề mặt bê tông.</p>
+                                <p data-i18n="pillar2_desc">Giải quyết triệt để mất cân bằng mẫu cực đoan khi điểm ảnh
+                                    vết nứt chỉ chiếm 1% - 5% tổng bề mặt bê tông.</p>
                             </div>
                         </div>
                         <div class="dash-pillar-card">
                             <div class="pillar-icon"><i class="fa-solid fa-shield-virus"></i></div>
                             <div class="pillar-body">
                                 <h4 data-i18n="pillar3_title">Encoder Residual ResNet-34</h4>
-                                <p data-i18n="pillar3_desc">Tận dụng trọng số tiền huấn luyện ImageNet và đường tắt Skip Connections, hội tụ mượt mà đạt mIoU 58.39%.</p>
+                                <p data-i18n="pillar3_desc">Tận dụng trọng số tiền huấn luyện ImageNet và đường tắt Skip
+                                    Connections, hội tụ mượt mà đạt mIoU 58.39%.</p>
                             </div>
                         </div>
                         <div class="dash-pillar-card">
                             <div class="pillar-icon"><i class="fa-solid fa-server"></i></div>
                             <div class="pillar-body">
                                 <h4 data-i18n="pillar4_title">Cơ Sở Dữ Liệu Kép Công Nghiệp</h4>
-                                <p data-i18n="pillar4_desc">Hỗ trợ Microsoft SQL Server 2022 (SSMS) phục vụ giám định doanh nghiệp kết hợp bộ nhớ đệm SQLite cục bộ.</p>
+                                <p data-i18n="pillar4_desc">Hỗ trợ Microsoft SQL Server 2022 (SSMS) phục vụ giám định
+                                    doanh nghiệp kết hợp bộ nhớ đệm SQLite cục bộ.</p>
                             </div>
                         </div>
                     </div>
@@ -688,13 +842,18 @@
                                     <i class="fa-solid fa-cloud-arrow-up"></i>
                                 </div>
                                 <div class="dropzone-text-group">
-                                    <h4 class="drop-title" data-i18n="drop_title">Kéo và Thả ảnh bề mặt công trình vào đây</h4>
-                                    <p class="drop-subtitle"><span data-i18n="drop_subtitle">hoặc</span> <span class="browse-link" data-i18n="browse_link">nhấn vào đây để chọn ảnh từ máy tính</span></p>
+                                    <h4 class="drop-title" data-i18n="drop_title">Kéo và Thả ảnh bề mặt công trình vào
+                                        đây</h4>
+                                    <p class="drop-subtitle"><span data-i18n="drop_subtitle">hoặc</span> <span
+                                            class="browse-link" data-i18n="browse_link">nhấn vào đây để chọn ảnh từ máy
+                                            tính</span></p>
                                 </div>
                                 <div class="dropzone-badges">
                                     <span class="badge-format"><i class="fa-regular fa-image"></i> JPG, PNG, JPEG</span>
-                                    <span class="badge-format"><i class="fa-solid fa-weight-hanging"></i> <span data-i18n="badge_max_size">Tối đa 20MB</span></span>
-                                    <span class="badge-format"><i class="fa-solid fa-microchip"></i> <span data-i18n="badge_gpu_accel">Tăng tốc GPU / CPU</span></span>
+                                    <span class="badge-format"><i class="fa-solid fa-weight-hanging"></i> <span
+                                            data-i18n="badge_max_size">Tối đa 20MB</span></span>
+                                    <span class="badge-format"><i class="fa-solid fa-microchip"></i> <span
+                                            data-i18n="badge_gpu_accel">Tăng tốc GPU / CPU</span></span>
                                 </div>
                             </div>
                         </div>
@@ -704,7 +863,8 @@
                                 <span data-i18n="or_sample_divider">Hoặc thử nghiệm nhanh với dữ liệu mẫu</span>
                             </div>
                             <button id="btn-sample" class="btn-sample-modern">
-                                <i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="btn_sample_image">Dùng ảnh mẫu bê tông</span>
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="btn_sample_image">Dùng
+                                    ảnh mẫu bê tông</span>
                             </button>
                         </div>
                     </div>
@@ -713,7 +873,8 @@
                     <div id="inference-progress-container" class="inference-progress-container hidden">
                         <div class="progress-bar-wrapper">
                             <div class="progress-info">
-                                <span id="inference-status-text"><i class="fa-solid fa-circle-notch fa-spin"></i> Đang tiền xử lý ảnh &amp; khởi chạy mô hình AI...</span>
+                                <span id="inference-status-text"><i class="fa-solid fa-circle-notch fa-spin"></i> Đang
+                                    tiền xử lý ảnh &amp; khởi chạy mô hình AI...</span>
                                 <span id="inference-percent-text" class="progress-percent">0%</span>
                             </div>
                             <div class="progress-bar-track">
@@ -727,11 +888,14 @@
                         <div class="sheet-header">
                             <div class="sheet-title-group">
                                 <i class="fa-solid fa-file-lines"></i>
-                                <span class="sheet-label" data-i18n="sheet_title">PHIẾU KIỂM ĐỊNH KỸ THUẬT KẾT CẤU BÊ TÔNG</span>
+                                <span class="sheet-label" data-i18n="sheet_title">PHIẾU KIỂM ĐỊNH KỸ THUẬT KẾT CẤU BÊ
+                                    TÔNG</span>
                             </div>
                             <div class="sheet-meta">
-                                <span class="meta-tag"><i class="fa-regular fa-clock"></i> <span id="sheet-timestamp">--:--:--</span></span>
-                                <span class="meta-tag"><i class="fa-solid fa-layer-group"></i> <span id="sheet-model-name">Compact U-Net</span></span>
+                                <span class="meta-tag"><i class="fa-regular fa-clock"></i> <span
+                                        id="sheet-timestamp">--:--:--</span></span>
+                                <span class="meta-tag"><i class="fa-solid fa-layer-group"></i> <span
+                                        id="sheet-model-name">Compact U-Net</span></span>
                             </div>
                         </div>
 
@@ -767,8 +931,10 @@
                             <div class="strip-item risk-strip-item">
                                 <div class="strip-risk-header">
                                     <span class="strip-label" data-i18n="metric_risk_title">Mức độ rủi ro kết cấu</span>
-                                    <span class="strip-risk-status text-waiting" id="metric-risk" data-i18n="metric_waiting">Chưa phân tích</span>
-                                    <div id="risk-icon-box" style="display:none;"><i class="fa-solid fa-shield-halved"></i></div>
+                                    <span class="strip-risk-status text-waiting" id="metric-risk"
+                                        data-i18n="metric_waiting">Chưa phân tích</span>
+                                    <div id="risk-icon-box" style="display:none;"><i
+                                            class="fa-solid fa-shield-halved"></i></div>
                                 </div>
                                 <div class="risk-gauge-container">
                                     <div class="risk-gauge-track">
@@ -786,7 +952,8 @@
                                         <span class="scale-lbl point-danger">5.0%+</span>
                                     </div>
                                 </div>
-                                <span class="strip-sub" data-i18n="metric_risk_sub">Thang đo liên tục phân cấp rủi ro</span>
+                                <span class="strip-sub" data-i18n="metric_risk_sub">Thang đo liên tục phân cấp rủi
+                                    ro</span>
                             </div>
                         </div>
                     </div>
@@ -795,20 +962,23 @@
                     <div class="legend-card">
                         <div class="legend-title">
                             <i class="fa-solid fa-circle-info"></i>
-                            <strong data-i18n="legend_header">Chú Giải Kỹ Thuật &amp; Phân Vùng Nguy Cơ Kết Cấu:</strong>
+                            <strong data-i18n="legend_header">Chú Giải Kỹ Thuật &amp; Phân Vùng Nguy Cơ Kết
+                                Cấu:</strong>
                         </div>
                         <div class="legend-grid">
                             <div class="legend-item">
                                 <span class="legend-color-dot" id="legend-crack-dot" style="background:#B4432A;"></span>
                                 <div class="legend-desc">
-                                    <span class="legend-name" data-i18n="legend_crack_title">Vùng Vết Nứt (Defect)</span>
+                                    <span class="legend-name" data-i18n="legend_crack_title">Vùng Vết Nứt
+                                        (Defect)</span>
                                     <small data-i18n="legend_crack_sub">Điểm ảnh phát hiện khuyết tật vết nứt</small>
                                 </div>
                             </div>
                             <div class="legend-item">
                                 <span class="legend-color-dot concrete-dot"></span>
                                 <div class="legend-desc">
-                                    <span class="legend-name" data-i18n="legend_concrete_title">Bề Mặt Bê Tông Nguyên Vẹn</span>
+                                    <span class="legend-name" data-i18n="legend_concrete_title">Bề Mặt Bê Tông Nguyên
+                                        Vẹn</span>
                                     <small data-i18n="legend_concrete_sub">Nền kết cấu không khuyết tật</small>
                                 </div>
                             </div>
@@ -817,11 +987,13 @@
                                 <small data-i18n="legend_desc_safe">Vết nứt vi mô bề mặt, an toàn</small>
                             </div>
                             <div class="legend-item">
-                                <span class="legend-pill tag-medium" data-i18n="legend_tag_warning">Cảnh Báo (1% - 3.5%)</span>
+                                <span class="legend-pill tag-medium" data-i18n="legend_tag_warning">Cảnh Báo (1% -
+                                    3.5%)</span>
                                 <small data-i18n="legend_desc_warning">Có dấu hiệu lan rộng, cần đo siêu âm</small>
                             </div>
                             <div class="legend-item">
-                                <span class="legend-pill tag-high" data-i18n="legend_tag_danger">Nguy Hiểm (&gt; 3.5%)</span>
+                                <span class="legend-pill tag-high" data-i18n="legend_tag_danger">Nguy Hiểm (&gt;
+                                    3.5%)</span>
                                 <small data-i18n="legend_desc_danger">Mật độ nứt cao, cần gia cố khẩn cấp</small>
                             </div>
                         </div>
@@ -831,9 +1003,14 @@
                     <div class="display-container glass-card">
                         <div class="display-header">
                             <div class="display-tabs">
-                                <button class="view-btn active" data-view="view-curtain"><i class="fa-solid fa-sliders"></i> <span data-i18n="view_curtain_btn">Thanh Trượt So Sánh Interactive</span></button>
-                                <button class="view-btn" data-view="view-split"><i class="fa-solid fa-table-columns"></i> <span data-i18n="view_split_btn">Xem Song Song (Side-by-Side)</span></button>
-                                <button class="view-btn" data-view="view-mask"><i class="fa-solid fa-layer-group"></i> <span data-i18n="view_mask_btn">Mặt Nạ Nhị Phân (Binary Mask)</span></button>
+                                <button class="view-btn active" data-view="view-curtain"><i
+                                        class="fa-solid fa-sliders"></i> <span data-i18n="view_curtain_btn">Thanh Trượt
+                                        So Sánh Interactive</span></button>
+                                <button class="view-btn" data-view="view-split"><i
+                                        class="fa-solid fa-table-columns"></i> <span data-i18n="view_split_btn">Xem Song
+                                        Song (Side-by-Side)</span></button>
+                                <button class="view-btn" data-view="view-mask"><i class="fa-solid fa-layer-group"></i>
+                                    <span data-i18n="view_mask_btn">Mặt Nạ Nhị Phân (Binary Mask)</span></button>
                             </div>
                         </div>
 
@@ -843,7 +1020,10 @@
                                 <div class="slider-empty-placeholder" id="curtain-placeholder">
                                     <div class="empty-icon-box"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
                                     <h4 data-i18n="curtain_placeholder_title">Chưa Có Hình Ảnh Phân Tích</h4>
-                                    <p data-i18n="curtain_placeholder_desc">Tải ảnh bề mặt công trình lên hoặc nhấn nút <strong>"Dùng Ảnh Mẫu Vết Nứt Bê Tông"</strong> để xem kết quả phân đoạn tương tác.</p>
+                                    <p data-i18n="curtain_placeholder_desc">Tải ảnh bề mặt công trình lên hoặc nhấn nút
+                                        <strong>"Dùng Ảnh Mẫu Vết Nứt Bê Tông"</strong> để xem kết quả phân đoạn tương
+                                        tác.
+                                    </p>
                                 </div>
                                 <img id="img-after" class="image-after hidden" src="" alt="Kết quả phủ màu vết nứt">
                                 <div class="image-before-wrapper hidden" id="before-wrapper">
@@ -860,7 +1040,8 @@
                         <div id="view-split" class="view-panel">
                             <div class="split-grid">
                                 <div class="img-box">
-                                    <h4><i class="fa-regular fa-image"></i> <span data-i18n="split_orig_title">Ảnh Gốc Bề Mặt Bê Tông</span></h4>
+                                    <h4><i class="fa-regular fa-image"></i> <span data-i18n="split_orig_title">Ảnh Gốc
+                                            Bề Mặt Bê Tông</span></h4>
                                     <div class="panel-empty-placeholder" id="split-before-placeholder">
                                         <i class="fa-regular fa-image"></i>
                                         <span data-i18n="split_waiting_orig">Chờ nạp ảnh bề mặt...</span>
@@ -868,7 +1049,9 @@
                                     <img id="split-before" class="hidden" src="" alt="Ảnh gốc">
                                 </div>
                                 <div class="img-box">
-                                    <h4><i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="split_overlay_title">Phân Đoạn &amp; Phủ Màu (Overlay)</span></h4>
+                                    <h4><i class="fa-solid fa-wand-magic-sparkles"></i> <span
+                                            data-i18n="split_overlay_title">Phân Đoạn &amp; Phủ Màu (Overlay)</span>
+                                    </h4>
                                     <div class="panel-empty-placeholder" id="split-after-placeholder">
                                         <i class="fa-solid fa-layer-group"></i>
                                         <span data-i18n="split_waiting_overlay">Chờ kết quả phân đoạn AI...</span>
@@ -881,7 +1064,8 @@
                         <!-- VIEW 3: BINARY MASK -->
                         <div id="view-mask" class="view-panel">
                             <div class="mask-center-box">
-                                <h4><i class="fa-solid fa-microscope"></i> <span data-i18n="mask_title">Mặt Nạ Nhị Phân Phân Đoạn Vết Nứt (0: Bê tông / 255: Vết nứt)</span></h4>
+                                <h4><i class="fa-solid fa-microscope"></i> <span data-i18n="mask_title">Mặt Nạ Nhị Phân
+                                        Phân Đoạn Vết Nứt (0: Bê tông / 255: Vết nứt)</span></h4>
                                 <div class="panel-empty-placeholder" id="mask-placeholder">
                                     <i class="fa-solid fa-microchip"></i>
                                     <span data-i18n="mask_waiting">Chờ trích xuất mặt nạ nhị phân 0/255...</span>
@@ -896,13 +1080,16 @@
                         <div class="action-info">
                             <i class="fa-solid fa-shield-halved info-icon"></i>
                             <div>
-                                <strong id="rec-title" data-i18n="rec_title_default">Đánh giá chung: Chưa có dữ liệu ảnh</strong>
-                                <p id="rec-desc" data-i18n="rec_desc_default">Hãy tải lên một bức ảnh hoặc nhấn nút 'Dùng Ảnh Mẫu Vết Nứt Bê Tông' để bắt đầu chạy phân đoạn AI.</p>
+                                <strong id="rec-title" data-i18n="rec_title_default">Đánh giá chung: Chưa có dữ liệu
+                                    ảnh</strong>
+                                <p id="rec-desc" data-i18n="rec_desc_default">Hãy tải lên một bức ảnh hoặc nhấn nút
+                                    'Dùng Ảnh Mẫu Vết Nứt Bê Tông' để bắt đầu chạy phân đoạn AI.</p>
                             </div>
                         </div>
 
                         <div class="action-buttons">
-                            <button id="btn-download-pdf" class="btn-pdf"><i class="fa-solid fa-file-pdf"></i> <span data-i18n="btn_pdf">Tải Báo Cáo Audit PDF</span></button>
+                            <button id="btn-download-pdf" class="btn-pdf"><i class="fa-solid fa-file-pdf"></i> <span
+                                    data-i18n="btn_pdf">Tải Báo Cáo Audit PDF</span></button>
                         </div>
                     </div>
                 </section>
@@ -913,19 +1100,21 @@
                         <div class="video-control-banner">
                             <div class="video-inputs">
                                 <label for="video-file-input" class="btn-sample-outline">
-                                    <i class="fa-solid fa-file-video"></i> <span data-i18n="btn_select_video">Chọn Video Công Trình (.mp4, .mov)</span>
+                                    <i class="fa-solid fa-file-video"></i> <span data-i18n="btn_select_video">Chọn Video
+                                        Công Trình (.mp4, .mov)</span>
                                 </label>
                                 <input type="file" id="video-file-input" accept="video/*" style="display:none;">
-                                
+
                                 <button id="btn-sample-video" class="btn-sample">
-                                    <i class="fa-solid fa-film"></i> <span data-i18n="btn_sample_video">Dùng Video Mẫu Crack</span>
+                                    <i class="fa-solid fa-film"></i> <span data-i18n="btn_sample_video">Dùng Video Mẫu
+                                        Crack</span>
                                 </button>
 
                                 <button id="btn-process-video" class="btn-sample-success">
-                                    <i class="fa-solid fa-circle-play"></i> <span data-i18n="btn_process_video_start">Bắt Đầu Phân Đoạn Real-Time</span>
+                                    <i class="fa-solid fa-circle-play"></i> <span
+                                        data-i18n="btn_process_video_start">Bắt Đầu Phân Đoạn Real-Time</span>
                                 </button>
                             </div>
-
 
                             <div class="live-stats-bar">
                                 <div class="stat-pill"><i class="fa-solid fa-tachograph-digital"></i> <span data-i18n="video_speed">Tốc Độ:</span> <strong id="video-fps">0 FPS</strong></div>
@@ -963,65 +1152,86 @@
                         <div class="video-control-banner">
                             <div class="video-inputs">
                                 <button id="btn-webcam" class="btn-sample-success">
-                                    <i class="fa-solid fa-power-off"></i> <span data-i18n="btn_webcam_on">Bật WebCam Kiểm Định</span>
+                                    <i class="fa-solid fa-power-off"></i> <span data-i18n="btn_webcam_on">Bật WebCam
+                                        Kiểm Định</span>
                                 </button>
-                                
+
                                 <button id="btn-camera-ai" class="btn-sample" disabled>
-                                    <i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="btn_camera_ai_start">Bắt Đầu Phân Đoạn AI</span>
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i> <span
+                                        data-i18n="btn_camera_ai_start">Bắt Đầu Phân Đoạn AI</span>
                                 </button>
 
                                 <button id="btn-camera-snapshot" class="btn-sample-outline" disabled>
-                                    <i class="fa-solid fa-camera-retro"></i> <span data-i18n="btn_camera_snapshot">Chụp Ảnh &amp; Phân Tích</span>
+                                    <i class="fa-solid fa-camera-retro"></i> <span data-i18n="btn_camera_snapshot">Chụp
+                                        Ảnh &amp; Phân Tích</span>
                                 </button>
 
-                                <button id="btn-virtual-camera" class="btn-sample-outline" title="Chạy luồng video mô phỏng nếu thiết bị không có webcam">
+                                <button id="btn-virtual-camera" class="btn-sample-outline"
+                                    title="Chạy luồng video mô phỏng nếu thiết bị không có webcam">
 
-                                    <i class="fa-solid fa-laptop-code"></i> <span data-i18n="btn_virtual_camera_on">Dùng Luồng Mô Phỏng</span>
+                                    <i class="fa-solid fa-laptop-code"></i> <span data-i18n="btn_virtual_camera_on">Dùng
+                                        Luồng Mô Phỏng</span>
                                 </button>
                             </div>
 
                             <div class="live-stats-bar">
-                                <div class="stat-pill"><i class="fa-solid fa-tachograph-digital"></i> <span data-i18n="video_speed">Tốc Độ:</span> <strong id="camera-fps">0 FPS</strong></div>
-                                <div class="stat-pill"><i class="fa-solid fa-chart-pie"></i> <span data-i18n="video_density">Mật Độ:</span> <strong id="camera-ratio">0.00%</strong></div>
-                                <div class="stat-pill"><i class="fa-solid fa-shield-cat"></i> <span data-i18n="video_alert">Cảnh Báo:</span> <strong id="camera-risk" style="color:#94a3b8;">CHỜ CAMERA</strong></div>
+                                <div class="stat-pill"><i class="fa-solid fa-tachograph-digital"></i> <span
+                                        data-i18n="video_speed">Tốc Độ:</span> <strong id="camera-fps">0 FPS</strong>
+                                </div>
+                                <div class="stat-pill"><i class="fa-solid fa-chart-pie"></i> <span
+                                        data-i18n="video_density">Mật Độ:</span> <strong
+                                        id="camera-ratio">0.00%</strong></div>
+                                <div class="stat-pill"><i class="fa-solid fa-shield-cat"></i> <span
+                                        data-i18n="video_alert">Cảnh Báo:</span> <strong id="camera-risk"
+                                        style="color:#94a3b8;">CHỜ CAMERA</strong></div>
                             </div>
                         </div>
 
                         <!-- CAMERA NOTIFICATION / PERMISSION ALERT BANNER -->
                         <div id="camera-alert-banner" class="camera-alert-banner hidden">
                             <i class="fa-solid fa-triangle-exclamation"></i>
-                            <span id="camera-alert-msg">Chưa cấp quyền truy cập Camera hoặc không tìm thấy thiết bị webcam.</span>
+                            <span id="camera-alert-msg">Chưa cấp quyền truy cập Camera hoặc không tìm thấy thiết bị
+                                webcam.</span>
                         </div>
 
                         <!-- DUAL CAMERA STREAM GRID -->
                         <div class="dual-video-grid mt-3">
                             <div class="video-box">
-                                <h4><i class="fa-solid fa-video"></i> <span data-i18n="camera_stream_title">Luồng Camera Hiện Trường Trực Tiếp (Live Stream)</span></h4>
+                                <h4><i class="fa-solid fa-video"></i> <span data-i18n="camera_stream_title">Luồng Camera
+                                        Hiện Trường Trực Tiếp (Live Stream)</span></h4>
                                 <div class="camera-feed-wrapper">
                                     <div class="camera-placeholder" id="webcam-placeholder">
                                         <div class="cam-icon-circle">
                                             <i class="fa-solid fa-camera"></i>
                                         </div>
                                         <h4 data-i18n="cam_not_active_title">Camera Chưa Kích Hoạt</h4>
-                                        <p data-i18n="cam_not_active_desc">Nhấn <b>"Bật WebCam Kiểm Định"</b> để kết nối máy quay hoặc nhấn <b>"Dùng Luồng Mô Phỏng"</b> để thử nghiệm ngay tính năng phân đoạn.</p>
+                                        <p data-i18n="cam_not_active_desc">Nhấn <b>"Bật WebCam Kiểm Định"</b> để kết nối
+                                            máy quay hoặc nhấn <b>"Dùng Luồng Mô Phỏng"</b> để thử nghiệm ngay tính năng
+                                            phân đoạn.</p>
                                     </div>
                                     <video id="webcam-video" autoplay playsinline muted class="hidden"></video>
                                 </div>
                             </div>
 
                             <div class="video-box">
-                                <h4><i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="video_ai_stream">Phân Đoạn AI Real-Time Overlay (AI Stream)</span></h4>
+                                <h4><i class="fa-solid fa-wand-magic-sparkles"></i> <span
+                                        data-i18n="video_ai_stream">Phân Đoạn AI Real-Time Overlay (AI Stream)</span>
+                                </h4>
                                 <div class="overlay-video-wrapper">
                                     <div class="camera-placeholder" id="camera-overlay-placeholder">
                                         <div class="cam-icon-circle ai-circle">
                                             <i class="fa-solid fa-brain"></i>
                                         </div>
                                         <h4 data-i18n="cam_ai_wait_title">Chờ Khởi Động AI</h4>
-                                        <p data-i18n="cam_ai_wait_desc">Bật Camera và nhấn <b>"Bắt Đầu Phân Đoạn AI"</b> để hiển thị luồng phủ màu ranh giới vết nứt thời gian thực.</p>
+                                        <p data-i18n="cam_ai_wait_desc">Bật Camera và nhấn <b>"Bắt Đầu Phân Đoạn AI"</b>
+                                            để hiển thị luồng phủ màu ranh giới vết nứt thời gian thực.</p>
                                     </div>
-                                    <img id="camera-overlay-img" class="hidden" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='640' height='380' style='background:%230f172a;'></svg>" alt="Real-time Camera AI Overlay Stream">
+                                    <img id="camera-overlay-img" class="hidden"
+                                        src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='640' height='380' style='background:%230f172a;'></svg>"
+                                        alt="Real-time Camera AI Overlay Stream">
                                     <div id="camera-loader" class="video-loader hidden">
-                                        <i class="fa-solid fa-spinner fa-spin"></i> <span data-i18n="cam_loader_text">Đang Phân Đoạn Trực Tiếp...</span>
+                                        <i class="fa-solid fa-spinner fa-spin"></i> <span
+                                            data-i18n="cam_loader_text">Đang Phân Đoạn Trực Tiếp...</span>
                                     </div>
                                 </div>
                             </div>
@@ -1035,20 +1245,30 @@
                         <!-- BENCHMARK TOP HEADER & FILTER BAR -->
                         <div class="benchmark-header-bar">
                             <div class="benchmark-title-group">
-                                <h2><i class="fa-solid fa-scale-balanced"></i> <span data-i18n="bench_title">So Sánh &amp; Phân Tích Chuyên Sâu Các Mô Hình AI</span></h2>
-                                <p class="text-muted" data-i18n="bench_desc">Đối sánh thực nghiệm giữa các kiến trúc Học Sâu và Phương pháp Cổ điển khi ứng dụng vào <b>Phân Tích Ảnh Tĩnh</b> và <b>Phân Tích Video / Camera Trực Tiếp</b> (Tập kiểm thử 1.695 ảnh vết nứt bê tông độc lập).</p>
+                                <h2><i class="fa-solid fa-scale-balanced"></i> <span data-i18n="bench_title">So Sánh
+                                        &amp; Phân Tích Chuyên Sâu Các Mô Hình AI</span></h2>
+                                <p class="text-muted" data-i18n="bench_desc">Đối sánh thực nghiệm giữa các kiến trúc Học
+                                    Sâu và Phương pháp Cổ điển khi ứng dụng vào <b>Phân Tích Ảnh Tĩnh</b> và <b>Phân
+                                        Tích Video / Camera Trực Tiếp</b> (Tập kiểm thử 1.695 ảnh vết nứt bê tông độc
+                                    lập).</p>
                             </div>
 
                             <!-- SCENARIO TOGGLE FILTER BUTTONS -->
                             <div class="scenario-filter-pills" id="scenario-filter-group">
-                                <button type="button" class="scenario-pill-btn active" data-scenario="all" id="btn-scenario-all">
-                                    <i class="fa-solid fa-layer-group"></i> <span data-i18n="bench_filter_all">Tất Cả Kịch Bản</span>
+                                <button type="button" class="scenario-pill-btn active" data-scenario="all"
+                                    id="btn-scenario-all">
+                                    <i class="fa-solid fa-layer-group"></i> <span data-i18n="bench_filter_all">Tất Cả
+                                        Kịch Bản</span>
                                 </button>
-                                <button type="button" class="scenario-pill-btn" data-scenario="image" id="btn-scenario-image">
-                                    <i class="fa-solid fa-camera-retro"></i> <span data-i18n="bench_filter_image">Chuyên Phân Tích Ảnh</span>
+                                <button type="button" class="scenario-pill-btn" data-scenario="image"
+                                    id="btn-scenario-image">
+                                    <i class="fa-solid fa-camera-retro"></i> <span data-i18n="bench_filter_image">Chuyên
+                                        Phân Tích Ảnh</span>
                                 </button>
-                                <button type="button" class="scenario-pill-btn" data-scenario="video" id="btn-scenario-video">
-                                    <i class="fa-solid fa-video"></i> <span data-i18n="bench_filter_video">Chuyên Phân Tích Video</span>
+                                <button type="button" class="scenario-pill-btn" data-scenario="video"
+                                    id="btn-scenario-video">
+                                    <i class="fa-solid fa-video"></i> <span data-i18n="bench_filter_video">Chuyên Phân
+                                        Tích Video</span>
                                 </button>
                             </div>
                         </div>
@@ -1062,7 +1282,8 @@
                                 <div class="bench-stat-card stat-img-accent">
                                     <div class="stat-icon-box"><i class="fa-solid fa-crosshairs"></i></div>
                                     <div class="stat-details">
-                                        <span class="stat-title" data-i18n="stat_best_iou_title">Độ Chính Xác Ảnh Cao Nhất</span>
+                                        <span class="stat-title" data-i18n="stat_best_iou_title">Độ Chính Xác Ảnh Cao
+                                            Nhất</span>
                                         <div class="stat-val tabular-num">61.20% <small>mIoU</small></div>
                                         <span class="stat-sub">DeepLabV3+ (Dice: 75.90%)</span>
                                     </div>
@@ -1071,7 +1292,8 @@
                                 <div class="bench-stat-card stat-vid-accent">
                                     <div class="stat-icon-box"><i class="fa-solid fa-bolt"></i></div>
                                     <div class="stat-details">
-                                        <span class="stat-title" data-i18n="stat_best_fps_title">Tốc Độ Video Nhanh Nhất</span>
+                                        <span class="stat-title" data-i18n="stat_best_fps_title">Tốc Độ Video Nhanh
+                                            Nhất</span>
                                         <div class="stat-val tabular-num">42.5 <small>FPS</small></div>
                                         <span class="stat-sub">Compact U-Net (Chuẩn Live)</span>
                                     </div>
@@ -1080,7 +1302,8 @@
                                 <div class="bench-stat-card stat-latency-accent">
                                     <div class="stat-icon-box"><i class="fa-solid fa-stopwatch"></i></div>
                                     <div class="stat-details">
-                                        <span class="stat-title" data-i18n="stat_lowest_latency_title">Độ Trễ Video Thấp Nhất</span>
+                                        <span class="stat-title" data-i18n="stat_lowest_latency_title">Độ Trễ Video Thấp
+                                            Nhất</span>
                                         <div class="stat-val tabular-num">23.5 <small>ms</small></div>
                                         <span class="stat-sub">Không đầy bộ đệm (No lag)</span>
                                     </div>
@@ -1089,7 +1312,8 @@
                                 <div class="bench-stat-card stat-res-accent">
                                     <div class="stat-icon-box"><i class="fa-solid fa-ruler"></i></div>
                                     <div class="stat-details">
-                                        <span class="stat-title" data-i18n="stat_min_width_title">Độ Rộng Nứt Nhỏ Nhất</span>
+                                        <span class="stat-title" data-i18n="stat_min_width_title">Độ Rộng Nứt Nhỏ
+                                            Nhất</span>
                                         <div class="stat-val tabular-num">&lt; 0.20 <small>mm</small></div>
                                         <span class="stat-sub">Bắt trọn mao mạch nứt vi mô</span>
                                     </div>
@@ -1102,39 +1326,54 @@
                                 <div class="rec-model-card image-rec-card">
                                     <div class="rec-card-top">
                                         <div class="rec-card-badge image-badge">
-                                            <i class="fa-solid fa-award"></i> <span data-i18n="rec_badge_image">TỐI ƯU NHẤT CHO ẢNH TĨNH</span>
+                                            <i class="fa-solid fa-award"></i> <span data-i18n="rec_badge_image">TỐI ƯU
+                                                NHẤT CHO ẢNH TĨNH</span>
                                         </div>
                                         <span class="rec-score-pill">9.8 / 10 ★</span>
                                     </div>
 
                                     <div class="rec-model-preview-thumb">
-                                        <img src="/static/assets/bench_card_photo_real.jpg?v=real_v2" alt="DeepLabV3+ crack segmentation preview" class="bench-thumb-img">
-                                        <div class="thumb-tag"><i class="fa-solid fa-camera"></i> <span>DeepLabV3+ // IoU 61.2%</span></div>
+                                        <img src="/static/assets/bench_card_photo_real.jpg?v=real_v2"
+                                            alt="DeepLabV3+ crack segmentation preview" class="bench-thumb-img">
+                                        <div class="thumb-tag"><i class="fa-solid fa-camera"></i> <span>DeepLabV3+ //
+                                                IoU 61.2%</span></div>
                                     </div>
 
-                                    <h3 class="rec-model-title mt-2">DeepLabV3+ (ResNet-50) &amp; U-Net ResNet-34 (512x512)</h3>
-                                    <p class="rec-model-summary" data-i18n="rec_image_summary">Khuyên dùng khi lập báo cáo thẩm định hồ sơ công trình, cần đo đạc diện tích nứt (m²) chính xác tuyệt đối và phát hiện các đường nứt vi mô cực mảnh (&lt; 0.2mm).</p>
-                                    
+                                    <h3 class="rec-model-title mt-2">DeepLabV3+ (ResNet-50) &amp; U-Net ResNet-34
+                                        (512x512)</h3>
+                                    <p class="rec-model-summary" data-i18n="rec_image_summary">Khuyên dùng khi lập báo
+                                        cáo thẩm định hồ sơ công trình, cần đo đạc diện tích nứt (m²) chính xác tuyệt
+                                        đối và phát hiện các đường nứt vi mô cực mảnh (&lt; 0.2mm).</p>
+
                                     <div class="rec-specs-list">
                                         <div class="rec-spec-item">
                                             <i class="fa-solid fa-circle-check" style="color: var(--hazard-safe);"></i>
                                             <div>
-                                                <strong data-i18n="rec_img_point1_title">Độ sắc nét &amp; mIoU cao nhất (61.2% / Dice 75.9%):</strong>
-                                                <span data-i18n="rec_img_point1_desc">Mô-đun ASPP với các lớp tích chập mở rộng trích xuất đặc trưng đa tỷ lệ, tái hiện toàn vẹn mạng lưới nứt phức tạp không bị đứt đoạn.</span>
+                                                <strong data-i18n="rec_img_point1_title">Độ sắc nét &amp; mIoU cao nhất
+                                                    (61.2% / Dice 75.9%):</strong>
+                                                <span data-i18n="rec_img_point1_desc">Mô-đun ASPP với các lớp tích chập
+                                                    mở rộng trích xuất đặc trưng đa tỷ lệ, tái hiện toàn vẹn mạng lưới
+                                                    nứt phức tạp không bị đứt đoạn.</span>
                                             </div>
                                         </div>
                                         <div class="rec-spec-item">
-                                            <i class="fa-solid fa-triangle-exclamation" style="color: var(--hazard-warning);"></i>
+                                            <i class="fa-solid fa-triangle-exclamation"
+                                                style="color: var(--hazard-warning);"></i>
                                             <div>
-                                                <strong data-i18n="rec_img_point2_title">Hạn chế khi chạy Video:</strong>
-                                                <span data-i18n="rec_img_point2_desc">Tốc độ ~28.6 FPS, tiêu hao VRAM lớn (40.1M params). Nếu quay quét camera nhanh trên phần cứng trung bình sẽ xảy ra hiện tượng trễ khung hình.</span>
+                                                <strong data-i18n="rec_img_point2_title">Hạn chế khi chạy
+                                                    Video:</strong>
+                                                <span data-i18n="rec_img_point2_desc">Tốc độ ~28.6 FPS, tiêu hao VRAM
+                                                    lớn (40.1M params). Nếu quay quét camera nhanh trên phần cứng trung
+                                                    bình sẽ xảy ra hiện tượng trễ khung hình.</span>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="rec-card-footer">
-                                        <span class="rec-tag"><i class="fa-solid fa-microscope"></i> <span data-i18n="tag_legal_audit">Hồ Sơ Pháp Lý Kiểm Định</span></span>
-                                        <span class="rec-tag"><i class="fa-solid fa-ruler-combined"></i> <span data-i18n="tag_precise_area">Đo Diện Tích m² Chuẩn Xác</span></span>
+                                        <span class="rec-tag"><i class="fa-solid fa-microscope"></i> <span
+                                                data-i18n="tag_legal_audit">Hồ Sơ Pháp Lý Kiểm Định</span></span>
+                                        <span class="rec-tag"><i class="fa-solid fa-ruler-combined"></i> <span
+                                                data-i18n="tag_precise_area">Đo Diện Tích m² Chuẩn Xác</span></span>
                                     </div>
                                 </div>
 
@@ -1142,39 +1381,55 @@
                                 <div class="rec-model-card video-rec-card">
                                     <div class="rec-card-top">
                                         <div class="rec-card-badge video-badge">
-                                            <i class="fa-solid fa-bolt-lightning"></i> <span data-i18n="rec_badge_video">TỐI ƯU NHẤT CHO VIDEO &amp; CAMERA</span>
+                                            <i class="fa-solid fa-bolt-lightning"></i> <span
+                                                data-i18n="rec_badge_video">TỐI ƯU NHẤT CHO VIDEO &amp; CAMERA</span>
                                         </div>
                                         <span class="rec-score-pill">9.6 / 10 ★</span>
                                     </div>
 
                                     <div class="rec-model-preview-thumb">
-                                        <img src="/static/assets/bench_card_video_real.jpg?v=real_v2" alt="Compact U-Net video telemetry preview" class="bench-thumb-img">
-                                        <div class="thumb-tag video-thumb-tag"><i class="fa-solid fa-video"></i> <span>Compact U-Net // 42.5 FPS</span></div>
+                                        <img src="/static/assets/bench_card_video_real.jpg?v=real_v2"
+                                            alt="Compact U-Net video telemetry preview" class="bench-thumb-img">
+                                        <div class="thumb-tag video-thumb-tag"><i class="fa-solid fa-video"></i>
+                                            <span>Compact U-Net // 42.5 FPS</span>
+                                        </div>
                                     </div>
 
-                                    <h3 class="rec-model-title mt-2">Compact U-Net (PyTorch) &amp; U-Net ResNet-34 (512x512)</h3>
-                                    <p class="rec-model-summary" data-i18n="rec_video_summary">Khuyên dùng khi khảo sát hiện trường trực tiếp, bay Drone quét dọc bề mặt dầm cầu, trụ bê tông cao tầng hoặc livestream camera kiểm tra liên tục không giật lag.</p>
-                                    
+                                    <h3 class="rec-model-title mt-2">Compact U-Net (PyTorch) &amp; U-Net ResNet-34
+                                        (512x512)</h3>
+                                    <p class="rec-model-summary" data-i18n="rec_video_summary">Khuyên dùng khi khảo sát
+                                        hiện trường trực tiếp, bay Drone quét dọc bề mặt dầm cầu, trụ bê tông cao tầng
+                                        hoặc livestream camera kiểm tra liên tục không giật lag.</p>
+
                                     <div class="rec-specs-list">
                                         <div class="rec-spec-item">
                                             <i class="fa-solid fa-circle-check" style="color: var(--hazard-safe);"></i>
                                             <div>
-                                                <strong data-i18n="rec_vid_point1_title">Tốc độ thời gian thực vượt trội (42.5 FPS / Độ trễ 23.5ms):</strong>
-                                                <span data-i18n="rec_vid_point1_desc">Kiến trúc Encoder-Decoder đối xứng tinh gọn, dung lượng nhẹ, xử lý tức thời từng khung hình mà không gây đầy bộ đệm (frame backlog).</span>
+                                                <strong data-i18n="rec_vid_point1_title">Tốc độ thời gian thực vượt trội
+                                                    (42.5 FPS / Độ trễ 23.5ms):</strong>
+                                                <span data-i18n="rec_vid_point1_desc">Kiến trúc Encoder-Decoder đối xứng
+                                                    tinh gọn, dung lượng nhẹ, xử lý tức thời từng khung hình mà không
+                                                    gây đầy bộ đệm (frame backlog).</span>
                                             </div>
                                         </div>
                                         <div class="rec-spec-item">
                                             <i class="fa-solid fa-circle-info" style="color: var(--accent-light);"></i>
                                             <div>
-                                                <strong data-i18n="rec_vid_point2_title">Đánh đổi kỹ thuật (Trade-off):</strong>
-                                                <span data-i18n="rec_vid_point2_desc">Độ nét biên đạt mIoU 54.5%, đủ tin cậy để khoanh vùng hư hại tức thời khi di chuyển, nhưng các mao mạch vi nứt cực mảnh đôi khi có thể bị gián đoạn nhẹ.</span>
+                                                <strong data-i18n="rec_vid_point2_title">Đánh đổi kỹ thuật
+                                                    (Trade-off):</strong>
+                                                <span data-i18n="rec_vid_point2_desc">Độ nét biên đạt mIoU 54.5%, đủ tin
+                                                    cậy để khoanh vùng hư hại tức thời khi di chuyển, nhưng các mao mạch
+                                                    vi nứt cực mảnh đôi khi có thể bị gián đoạn nhẹ.</span>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="rec-card-footer">
-                                        <span class="rec-tag"><i class="fa-solid fa-plane"></i> <span data-i18n="tag_drone_inspection">Khảo Sát Drone Công Trình</span></span>
-                                        <span class="rec-tag"><i class="fa-solid fa-tower-observation"></i> <span data-i18n="tag_realtime_stream">Giám Sát Hiện Trường Trực Tiếp</span></span>
+                                        <span class="rec-tag"><i class="fa-solid fa-plane"></i> <span
+                                                data-i18n="tag_drone_inspection">Khảo Sát Drone Công Trình</span></span>
+                                        <span class="rec-tag"><i class="fa-solid fa-tower-observation"></i> <span
+                                                data-i18n="tag_realtime_stream">Giám Sát Hiện Trường Trực
+                                                Tiếp</span></span>
                                     </div>
                                 </div>
                             </div>
@@ -1187,9 +1442,12 @@
                         <div id="scenario-panel-image" class="scenario-panel hidden">
                             <div class="scenario-hero-banner img-hero mt-3">
                                 <div class="hero-left">
-                                    <span class="hero-pill"><i class="fa-solid fa-crown"></i> QUÁN QUÂN PHÂN TÍCH ẢNH TĨNH</span>
+                                    <span class="hero-pill"><i class="fa-solid fa-crown"></i> QUÁN QUÂN PHÂN TÍCH ẢNH
+                                        TĨNH</span>
                                     <h2>DeepLabV3+ (ResNet-50 Backbone)</h2>
-                                    <p>Được thiết kế chuyên biệt cho công tác lập hồ sơ kiểm định pháp lý kỹ thuật, tái hiện chính xác các đường nứt có bề rộng dưới 0.2mm và tính diện tích nứt bề mặt với độ lệch dưới 1.8%.</p>
+                                    <p>Được thiết kế chuyên biệt cho công tác lập hồ sơ kiểm định pháp lý kỹ thuật, tái
+                                        hiện chính xác các đường nứt có bề rộng dưới 0.2mm và tính diện tích nứt bề mặt
+                                        với độ lệch dưới 1.8%.</p>
                                 </div>
                                 <div class="hero-scores">
                                     <div class="score-box">
@@ -1205,63 +1463,78 @@
 
                             <!-- VISUAL PROOF GALLERY (HÌNH ẢNH THỰC NGHIỆM ĐỐI SÁNH) -->
                             <div class="visual-gallery-container mt-4">
-                                <h3 class="gallery-title"><i class="fa-solid fa-images"></i> <span data-i18n="gallery_img_title">Thực Nghiệm Thị Giác: Đối Sánh Phân Đoạn Trên Cùng Vết Nứt Vi Mô</span></h3>
-                                <p class="text-muted" data-i18n="gallery_img_desc">So sánh trực quan khả năng bảo toàn ranh giới vi nứt giữa các thuật toán khi phân tích ảnh hiện trường độ phân giải cao.</p>
+                                <h3 class="gallery-title"><i class="fa-solid fa-images"></i> <span
+                                        data-i18n="gallery_img_title">Thực Nghiệm Thị Giác: Đối Sánh Phân Đoạn Trên Cùng
+                                        Vết Nứt Vi Mô</span></h3>
+                                <p class="text-muted" data-i18n="gallery_img_desc">So sánh trực quan khả năng bảo toàn
+                                    ranh giới vi nứt giữa các thuật toán khi phân tích ảnh hiện trường độ phân giải cao.
+                                </p>
 
                                 <div class="visual-gallery-grid mt-3">
                                     <div class="visual-card">
                                         <div class="card-img-wrap">
-                                            <img src="/static/assets/bench_orig.jpg?v=real_v2" alt="Ảnh Gốc Bề Mặt" class="gallery-img">
+                                            <img src="/static/assets/bench_orig.jpg?v=real_v2" alt="Ảnh Gốc Bề Mặt"
+                                                class="gallery-img">
                                             <span class="gallery-badge badge-orig">1. Ảnh Gốc</span>
                                         </div>
                                         <div class="card-caption">
                                             <h4>Bề Mặt Bê Tông Hiện Trường</h4>
-                                            <p>Vết nứt chính kèm các nhánh nứt vi mô mảnh (< 0.2mm) trên nền bê tông có vân sần.</p>
+                                            <p>Vết nứt chính kèm các nhánh nứt vi mô mảnh (< 0.2mm) trên nền bê tông có
+                                                    vân sần.</p>
                                         </div>
                                     </div>
 
                                     <div class="visual-card highlight-card-gold">
                                         <div class="card-img-wrap">
-                                            <img src="/static/assets/bench_deeplab.jpg?v=real_v2" alt="DeepLabV3+ Phân Đoạn" class="gallery-img">
+                                            <img src="/static/assets/bench_deeplab.jpg?v=real_v2"
+                                                alt="DeepLabV3+ Phân Đoạn" class="gallery-img">
                                             <span class="gallery-badge badge-winner">2. DeepLabV3+ (9.8/10)</span>
                                         </div>
                                         <div class="card-caption">
                                             <h4>Mạng Lưới Nứt Liền Mạch (ASPP)</h4>
-                                            <p>Mô-đun ASPP mở rộng trường tiếp nhận đa tỷ lệ, bắt trọn 100% nhánh nứt phụ mà không bị đứt đoạn.</p>
+                                            <p>Mô-đun ASPP mở rộng trường tiếp nhận đa tỷ lệ, bắt trọn 100% nhánh nứt
+                                                phụ mà không bị đứt đoạn.</p>
                                         </div>
                                     </div>
 
                                     <div class="visual-card highlight-card-blue">
                                         <div class="card-img-wrap">
-                                            <img src="/static/assets/bench_resunet34.jpg?v=real_v2" alt="U-Net ResNet-34 512x512 Phân Đoạn" class="gallery-img">
-                                            <span class="gallery-badge badge-resunet">3. U-Net ResNet-34 512 (9.6/10)</span>
+                                            <img src="/static/assets/bench_resunet34.jpg?v=real_v2"
+                                                alt="U-Net ResNet-34 512x512 Phân Đoạn" class="gallery-img">
+                                            <span class="gallery-badge badge-resunet">3. U-Net ResNet-34 512
+                                                (9.6/10)</span>
                                         </div>
                                         <div class="card-caption">
                                             <h4>Độ Phân Giải Cao 512x512 (Residual)</h4>
-                                            <p>Cấu trúc Residual 34 tầng trích xuất chi tiết sắc nét, đạt Val IoU 59.81%, giữ mạch vết nứt mảnh nguyên vẹn.</p>
+                                            <p>Cấu trúc Residual 34 tầng trích xuất chi tiết sắc nét, đạt Val IoU
+                                                59.81%, giữ mạch vết nứt mảnh nguyên vẹn.</p>
                                         </div>
                                     </div>
 
                                     <div class="visual-card">
                                         <div class="card-img-wrap">
-                                            <img src="/static/assets/bench_unet.jpg?v=real_v2" alt="Compact U-Net Phân Đoạn" class="gallery-img">
+                                            <img src="/static/assets/bench_unet.jpg?v=real_v2"
+                                                alt="Compact U-Net Phân Đoạn" class="gallery-img">
                                             <span class="gallery-badge badge-unet">4. Compact U-Net (7.9/10)</span>
                                         </div>
                                         <div class="card-caption">
                                             <h4>Bắt Tốt Nứt Chính, Hở Nhánh Phụ</h4>
-                                            <p>Phân đoạn tốt rãnh nứt lớn; tuy nhiên nhánh vi mao mạch cực mảnh bị gián đoạn nhẹ.</p>
+                                            <p>Phân đoạn tốt rãnh nứt lớn; tuy nhiên nhánh vi mao mạch cực mảnh bị gián
+                                                đoạn nhẹ.</p>
                                         </div>
                                     </div>
 
                                     <div class="visual-card">
                                         <div class="card-img-wrap">
-                                            <img src="/static/assets/bench_sobel.jpg?v=real_v2" alt="Sobel Cổ Điển" class="gallery-img">
+                                            <img src="/static/assets/bench_sobel.jpg?v=real_v2" alt="Sobel Cổ Điển"
+                                                class="gallery-img">
                                             <span class="gallery-badge badge-sobel">5. Sobel + Otsu (4.5/10)</span>
                                         </div>
 
                                         <div class="card-caption">
                                             <h4>Bị Nhiễu Vân Đá Bê Tông</h4>
-                                            <p>Toán tử gradient nhận nhầm các hạt cát, bụi và bóng râm thành nứt, sai số diện tích lớn.</p>
+                                            <p>Toán tử gradient nhận nhầm các hạt cát, bụi và bóng râm thành nứt, sai số
+                                                diện tích lớn.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -1274,9 +1547,12 @@
                         <div id="scenario-panel-video" class="scenario-panel hidden">
                             <div class="scenario-hero-banner vid-hero mt-3">
                                 <div class="hero-left">
-                                    <span class="hero-pill vid-pill"><i class="fa-solid fa-bolt"></i> QUÁN QUÂN PHÂN TÍCH VIDEO &amp; DRONE</span>
+                                    <span class="hero-pill vid-pill"><i class="fa-solid fa-bolt"></i> QUÁN QUÂN PHÂN
+                                        TÍCH VIDEO &amp; DRONE</span>
                                     <h2>Compact U-Net (PyTorch Optimized)</h2>
-                                    <p>Tối ưu hóa đường truyền tắt Skip-Connections giúp đẩy tốc độ xử lý lên 42.5 FPS với độ trễ chỉ 23.5ms. Khung hình được giải mã tức thì, không gây tràn bộ đệm (zero backlog) ngay cả khi Drone di chuyển nhanh.</p>
+                                    <p>Tối ưu hóa đường truyền tắt Skip-Connections giúp đẩy tốc độ xử lý lên 42.5 FPS
+                                        với độ trễ chỉ 23.5ms. Khung hình được giải mã tức thì, không gây tràn bộ đệm
+                                        (zero backlog) ngay cả khi Drone di chuyển nhanh.</p>
                                 </div>
                                 <div class="hero-scores">
                                     <div class="score-box vid-score">
@@ -1292,22 +1568,34 @@
 
                             <!-- VIDEO HUD TELEMETRY PROOF GALLERY -->
                             <div class="visual-gallery-container mt-4">
-                                <h3 class="gallery-title"><i class="fa-solid fa-video"></i> <span data-i18n="gallery_vid_title">Thực Nghiệm Luồng Video: Đo Lường Hiện Tượng Trễ Khung Hình &amp; Đầy Bộ Đệm</span></h3>
-                                <p class="text-muted" data-i18n="gallery_vid_desc">Mô phỏng luồng camera quét dọc dầm cầu bê tông với hiển thị HUD Telemetry thời gian thực.</p>
+                                <h3 class="gallery-title"><i class="fa-solid fa-video"></i> <span
+                                        data-i18n="gallery_vid_title">Thực Nghiệm Luồng Video: Đo Lường Hiện Tượng Trễ
+                                        Khung Hình &amp; Đầy Bộ Đệm</span></h3>
+                                <p class="text-muted" data-i18n="gallery_vid_desc">Mô phỏng luồng camera quét dọc dầm
+                                    cầu bê tông với hiển thị HUD Telemetry thời gian thực.</p>
 
                                 <div class="video-proof-grid mt-3">
                                     <!-- PROOF 1: COMPACT UNET -->
                                     <div class="video-proof-card video-card-winner">
                                         <div class="proof-img-wrap">
-                                            <img src="/static/assets/bench_video_unet.jpg?v=real_v2" alt="Compact U-Net Live HUD Stream" class="proof-img">
-                                            <span class="proof-status-badge status-realtime"><i class="fa-solid fa-circle-check"></i> THỜI GIAN THỰC HOÀN HẢO (42.5 FPS)</span>
+                                            <img src="/static/assets/bench_video_unet.jpg?v=real_v2"
+                                                alt="Compact U-Net Live HUD Stream" class="proof-img">
+                                            <span class="proof-status-badge status-realtime"><i
+                                                    class="fa-solid fa-circle-check"></i> THỜI GIAN THỰC HOÀN HẢO (42.5
+                                                FPS)</span>
                                         </div>
                                         <div class="proof-body">
                                             <h4>Compact U-Net: Tốc Độ 42.5 FPS // Độ Trễ 23.5ms</h4>
                                             <ul class="proof-list">
-                                                <li><i class="fa-solid fa-check text-success"></i> <strong>Zero Buffer Delay:</strong> Xử lý xong khung hình trước khi camera đưa khung tiếp theo vào hàng đợi.</li>
-                                                <li><i class="fa-solid fa-check text-success"></i> <strong>VRAM Siêu Nhẹ (~680 MB):</strong> Tiết kiệm hơn 52% bộ nhớ GPU so với DeepLabV3+, vận hành mát máy trên laptop công trường.</li>
-                                                <li><i class="fa-solid fa-check text-success"></i> <strong>Lý tưởng cho Drone:</strong> Bắt kịp tốc độ bay quét của flycam dọc trụ cầu cao tốc.</li>
+                                                <li><i class="fa-solid fa-check text-success"></i> <strong>Zero Buffer
+                                                        Delay:</strong> Xử lý xong khung hình trước khi camera đưa khung
+                                                    tiếp theo vào hàng đợi.</li>
+                                                <li><i class="fa-solid fa-check text-success"></i> <strong>VRAM Siêu Nhẹ
+                                                        (~680 MB):</strong> Tiết kiệm hơn 52% bộ nhớ GPU so với
+                                                    DeepLabV3+, vận hành mát máy trên laptop công trường.</li>
+                                                <li><i class="fa-solid fa-check text-success"></i> <strong>Lý tưởng cho
+                                                        Drone:</strong> Bắt kịp tốc độ bay quét của flycam dọc trụ cầu
+                                                    cao tốc.</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -1315,16 +1603,25 @@
                                     <!-- PROOF 2: DEEPLABV3+ VIDEO DRAWBACK -->
                                     <div class="video-proof-card video-card-warning">
                                         <div class="proof-img-wrap">
-                                            <img src="/static/assets/bench_video_deeplab.jpg?v=real_v2" alt="DeepLabV3+ Live HUD Stream" class="proof-img">
-                                            <span class="proof-status-badge status-lag"><i class="fa-solid fa-triangle-exclamation"></i> TỐC ĐỘ 28.6 FPS (NGUY CƠ LAG KHUNG)</span>
+                                            <img src="/static/assets/bench_video_deeplab.jpg?v=real_v2"
+                                                alt="DeepLabV3+ Live HUD Stream" class="proof-img">
+                                            <span class="proof-status-badge status-lag"><i
+                                                    class="fa-solid fa-triangle-exclamation"></i> TỐC ĐỘ 28.6 FPS (NGUY
+                                                CƠ LAG KHUNG)</span>
                                         </div>
 
                                         <div class="proof-body">
                                             <h4>DeepLabV3+: Tốc Độ 28.6 FPS // Độ Trễ 35.0ms</h4>
                                             <ul class="proof-list">
-                                                <li><i class="fa-solid fa-exclamation text-warning"></i> <strong>Chưa đạt 30 FPS mượt:</strong> Khi camera lia nhanh, mô hình bị dồn khung hình dẫn đến hiện tượng trễ hình ảnh hiển thị.</li>
-                                                <li><i class="fa-solid fa-exclamation text-warning"></i> <strong>Ngốn Tài Nguyên (40.1M tham số):</strong> Cần GPU máy trạm cao cấp (RTX 3080/4090) để duy trì trên 40 FPS.</li>
-                                                <li><i class="fa-solid fa-circle-info text-info"></i> <strong>Khuyến nghị:</strong> Chỉ kích hoạt DeepLabV3+ khi tạm dừng camera để chụp tĩnh một vị trí nghi vấn.</li>
+                                                <li><i class="fa-solid fa-exclamation text-warning"></i> <strong>Chưa
+                                                        đạt 30 FPS mượt:</strong> Khi camera lia nhanh, mô hình bị dồn
+                                                    khung hình dẫn đến hiện tượng trễ hình ảnh hiển thị.</li>
+                                                <li><i class="fa-solid fa-exclamation text-warning"></i> <strong>Ngốn
+                                                        Tài Nguyên (40.1M tham số):</strong> Cần GPU máy trạm cao cấp
+                                                    (RTX 3080/4090) để duy trì trên 40 FPS.</li>
+                                                <li><i class="fa-solid fa-circle-info text-info"></i> <strong>Khuyến
+                                                        nghị:</strong> Chỉ kích hoạt DeepLabV3+ khi tạm dừng camera để
+                                                    chụp tĩnh một vị trí nghi vấn.</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -1334,8 +1631,10 @@
 
                         <!-- COMPREHENSIVE BENCHMARK TABLE -->
                         <div class="table-section-title mt-4">
-                            <h3><i class="fa-solid fa-table-list"></i> <span data-i18n="bench_table_title">Bảng Đối Sánh Chi Tiết Toàn Diện 5 Mô Hình</span></h3>
-                            <p class="text-muted" data-i18n="bench_table_desc">So sánh trực tiếp điểm số phù hợp cho Ảnh vs Video, độ chính xác phân đoạn, độ trễ suy luận và số lượng tham số.</p>
+                            <h3><i class="fa-solid fa-table-list"></i> <span data-i18n="bench_table_title">Bảng Đối Sánh
+                                    Chi Tiết Toàn Diện 5 Mô Hình</span></h3>
+                            <p class="text-muted" data-i18n="bench_table_desc">So sánh trực tiếp điểm số phù hợp cho Ảnh
+                                vs Video, độ chính xác phân đoạn, độ trễ suy luận và số lượng tham số.</p>
                         </div>
 
                         <div class="table-wrapper mt-2">
@@ -1361,34 +1660,62 @@
                         <!-- VISUAL CHARTS GRID -->
                         <div class="charts-grid mt-4">
                             <div class="chart-box">
-                                <h4 data-i18n="chart1_title"><i class="fa-solid fa-chart-simple"></i> Chất Lượng Phân Tích Ảnh: Chỉ Số IoU &amp; Dice F1</h4>
+                                <h4 data-i18n="chart1_title"><i class="fa-solid fa-chart-simple"></i> Chất Lượng Phân
+                                    Tích Ảnh: Chỉ Số IoU &amp; Dice F1</h4>
                                 <canvas id="chart-metrics"></canvas>
                             </div>
                             <div class="chart-box">
-                                <h4 data-i18n="chart2_title"><i class="fa-solid fa-gauge-high"></i> Hiệu Năng Phân Tích Video: Tốc Độ Khung Hình (FPS) &amp; Độ Trễ</h4>
+                                <h4 data-i18n="chart2_title"><i class="fa-solid fa-gauge-high"></i> Hiệu Năng Phân Tích
+                                    Video: Tốc Độ Khung Hình (FPS) &amp; Độ Trễ</h4>
                                 <canvas id="chart-fps"></canvas>
                             </div>
                         </div>
 
                         <!-- TECHNICAL ARCHITECTURE DEEP DIVE -->
                         <div class="deep-dive-container mt-4">
-                            <h3 class="deep-dive-title"><i class="fa-solid fa-brain"></i> <span data-i18n="deep_dive_title">Giải Mã Kỹ Thuật: Tại Sao Có Sự Khác Biệt Giữa Phân Tích Ảnh &amp; Video?</span></h3>
+                            <h3 class="deep-dive-title"><i class="fa-solid fa-brain"></i> <span
+                                    data-i18n="deep_dive_title">Giải Mã Kỹ Thuật: Tại Sao Có Sự Khác Biệt Giữa Phân Tích
+                                    Ảnh &amp; Video?</span></h3>
                             <div class="deep-dive-grid">
                                 <div class="deep-dive-card">
-                                    <h4><i class="fa-solid fa-image" style="color: var(--accent-primary);"></i> <span data-i18n="dd_img_title">Cơ Chế Phân Tích Ảnh Tĩnh Tối Ưu</span></h4>
+                                    <h4><i class="fa-solid fa-image" style="color: var(--accent-primary);"></i> <span
+                                            data-i18n="dd_img_title">Cơ Chế Phân Tích Ảnh Tĩnh Tối Ưu</span></h4>
                                     <ul>
-                                        <li><strong data-i18n="dd_img_p1_bold">Yêu cầu cốt lõi:</strong> <span data-i18n="dd_img_p1_text">Độ chính xác từng pixel (Pixel-level Precision), phân tách được vết nứt có độ mở chỉ vài pixel mà không bị đứt gãy.</span></li>
-                                        <li><strong data-i18n="dd_img_p2_bold">Ưu thế của DeepLabV3+:</strong> <span data-i18n="dd_img_p2_text">Mô-đun ASPP (Atrous Spatial Pyramid Pooling) áp dụng nhiều tỷ lệ giãn nở (dilation rates = 6, 12, 18) giúp mở rộng vùng bao quát mà không làm suy giảm độ phân giải, kết hợp bộ giải mã phục hồi biên sắc nét.</span></li>
-                                        <li><strong data-i18n="dd_img_p3_bold">Chi phí đánh đổi:</strong> <span data-i18n="dd_img_p3_text">Cần tính toán 40.1 triệu tham số, tốn thời gian hơn (~35ms/ảnh) — điều này hoàn toàn chấp nhận được với ảnh chụp kiểm định tĩnh.</span></li>
+                                        <li><strong data-i18n="dd_img_p1_bold">Yêu cầu cốt lõi:</strong> <span
+                                                data-i18n="dd_img_p1_text">Độ chính xác từng pixel (Pixel-level
+                                                Precision), phân tách được vết nứt có độ mở chỉ vài pixel mà không bị
+                                                đứt gãy.</span></li>
+                                        <li><strong data-i18n="dd_img_p2_bold">Ưu thế của DeepLabV3+:</strong> <span
+                                                data-i18n="dd_img_p2_text">Mô-đun ASPP (Atrous Spatial Pyramid Pooling)
+                                                áp dụng nhiều tỷ lệ giãn nở (dilation rates = 6, 12, 18) giúp mở rộng
+                                                vùng bao quát mà không làm suy giảm độ phân giải, kết hợp bộ giải mã
+                                                phục hồi biên sắc nét.</span></li>
+                                        <li><strong data-i18n="dd_img_p3_bold">Chi phí đánh đổi:</strong> <span
+                                                data-i18n="dd_img_p3_text">Cần tính toán 40.1 triệu tham số, tốn thời
+                                                gian hơn (~35ms/ảnh) — điều này hoàn toàn chấp nhận được với ảnh chụp
+                                                kiểm định tĩnh.</span></li>
                                     </ul>
                                 </div>
 
                                 <div class="deep-dive-card">
-                                    <h4><i class="fa-solid fa-video" style="color: var(--hazard-safe);"></i> <span data-i18n="dd_vid_title">Cơ Chế Phân Tích Video &amp; Camera Tối Ưu</span></h4>
+                                    <h4><i class="fa-solid fa-video" style="color: var(--hazard-safe);"></i> <span
+                                            data-i18n="dd_vid_title">Cơ Chế Phân Tích Video &amp; Camera Tối Ưu</span>
+                                    </h4>
                                     <ul>
-                                        <li><strong data-i18n="dd_vid_p1_bold">Yêu cầu cốt lõi:</strong> <span data-i18n="dd_vid_p1_text">Tốc độ &gt; 30 FPS để bắt kịp tần số quét camera, độ trễ suy luận &lt; 25ms nhằm ngăn chặn hiện tượng dồn nghẽn bộ đệm khung hình.</span></li>
-                                        <li><strong data-i18n="dd_vid_p2_bold">Ưu thế của Compact U-Net:</strong> <span data-i18n="dd_vid_p2_text">Đường truyền tắt Skip Connections trực tiếp giữa Encoder và Decoder với số kênh tối ưu, giảm thiểu 40% chi phí tính toán so với các backbone nặng, duy trì FPS ổn định ngay cả khi camera lia nhanh.</span></li>
-                                        <li><strong data-i18n="dd_vid_p3_bold">Vai trò của phương pháp Cổ Điển:</strong> <span data-i18n="dd_vid_p3_text">Sobel/Canny (120 FPS) có thể đóng vai trò 'Bộ lọc chuyển động' tiền trạm, chỉ kích hoạt suy luận Deep Learning khi phát hiện có biến đổi cạnh nghi ngờ nứt.</span></li>
+                                        <li><strong data-i18n="dd_vid_p1_bold">Yêu cầu cốt lõi:</strong> <span
+                                                data-i18n="dd_vid_p1_text">Tốc độ &gt; 30 FPS để bắt kịp tần số quét
+                                                camera, độ trễ suy luận &lt; 25ms nhằm ngăn chặn hiện tượng dồn nghẽn bộ
+                                                đệm khung hình.</span></li>
+                                        <li><strong data-i18n="dd_vid_p2_bold">Ưu thế của Compact U-Net:</strong> <span
+                                                data-i18n="dd_vid_p2_text">Đường truyền tắt Skip Connections trực tiếp
+                                                giữa Encoder và Decoder với số kênh tối ưu, giảm thiểu 40% chi phí tính
+                                                toán so với các backbone nặng, duy trì FPS ổn định ngay cả khi camera
+                                                lia nhanh.</span></li>
+                                        <li><strong data-i18n="dd_vid_p3_bold">Vai trò của phương pháp Cổ Điển:</strong>
+                                            <span data-i18n="dd_vid_p3_text">Sobel/Canny (120 FPS) có thể đóng vai trò
+                                                'Bộ lọc chuyển động' tiền trạm, chỉ kích hoạt suy luận Deep Learning khi
+                                                phát hiện có biến đổi cạnh nghi ngờ nứt.</span>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -1401,22 +1728,35 @@
                     <div class="glass-card">
                         <div class="history-header-banner">
                             <div>
-                                <h2><i class="fa-solid fa-clock-rotate-left"></i> <span data-i18n="history_title">Nhật Ký &amp; Lịch Sử Kiểm Định Công Trình</span></h2>
-                                <p class="text-muted" data-i18n="history_desc">Theo dõi tiến trình kiểm định vết nứt, đối chiếu ranh giới hư hỏng và xuất lại báo cáo kỹ thuật bất cứ lúc nào.</p>
+                                <h2><i class="fa-solid fa-clock-rotate-left"></i> <span data-i18n="history_title">Nhật
+                                        Ký &amp; Lịch Sử Kiểm Định Công Trình</span></h2>
+                                <p class="text-muted" data-i18n="history_desc">Theo dõi tiến trình kiểm định vết nứt,
+                                    đối chiếu ranh giới hư hỏng và xuất lại báo cáo kỹ thuật bất cứ lúc nào.</p>
                             </div>
 
                             <div class="history-actions-top">
-                                <div class="stat-pill db-pill" id="db-status-pill" title="Cơ sở dữ liệu lưu trữ quan hệ SQL: crackvision.db"><i class="fa-solid fa-server" style="color: #10b981;"></i> <span data-i18n="history_db_lbl">SQL Database:</span> <strong id="db-engine-badge">SQLite (Online)</strong></div>
-                                <div class="stat-pill"><i class="fa-solid fa-database"></i> <span data-i18n="history_total_lbl">Tổng Số Phiên:</span> <strong id="history-total-count">0</strong></div>
-                                <button id="btn-export-csv" class="btn-sample-outline" title="Tải bảng dữ liệu dạng Excel / CSV"><i class="fa-solid fa-file-csv"></i> <span data-i18n="btn_export_csv">Xuất Bảng CSV</span></button>
-                                <button id="btn-clear-history" class="btn-sample-danger" title="Xóa toàn bộ các bản ghi kiểm định"><i class="fa-solid fa-trash-can"></i> <span data-i18n="btn_clear_history">Xóa Lịch Sử</span></button>
+                                <div class="stat-pill db-pill" id="db-status-pill"
+                                    title="Cơ sở dữ liệu lưu trữ quan hệ SQL: crackvision.db"><i
+                                        class="fa-solid fa-server" style="color: #10b981;"></i> <span
+                                        data-i18n="history_db_lbl">SQL Database:</span> <strong
+                                        id="db-engine-badge">SQLite (Online)</strong></div>
+                                <div class="stat-pill"><i class="fa-solid fa-database"></i> <span
+                                        data-i18n="history_total_lbl">Tổng Số Phiên:</span> <strong
+                                        id="history-total-count">0</strong></div>
+                                <button id="btn-export-csv" class="btn-sample-outline"
+                                    title="Tải bảng dữ liệu dạng Excel / CSV"><i class="fa-solid fa-file-csv"></i> <span
+                                        data-i18n="btn_export_csv">Xuất Bảng CSV</span></button>
+                                <button id="btn-clear-history" class="btn-sample-danger"
+                                    title="Xóa toàn bộ các bản ghi kiểm định"><i class="fa-solid fa-trash-can"></i>
+                                    <span data-i18n="btn_clear_history">Xóa Lịch Sử</span></button>
                             </div>
                         </div>
 
                         <!-- FILTER BAR -->
                         <div class="history-filter-bar mt-3">
                             <div class="filter-group">
-                                <label><i class="fa-solid fa-layer-group"></i> <span data-i18n="filter_source_lbl">Chức Năng:</span></label>
+                                <label><i class="fa-solid fa-layer-group"></i> <span data-i18n="filter_source_lbl">Chức
+                                        Năng:</span></label>
                                 <select id="history-source-filter" class="custom-select" style="max-width:200px;">
                                     <option value="all" data-i18n="source_all">Tất Cả Chức Năng</option>
                                     <option value="image" data-i18n="source_image">📷 Phân Tích Ảnh</option>
@@ -1426,7 +1766,8 @@
                             </div>
 
                             <div class="filter-group">
-                                <label><i class="fa-solid fa-filter"></i> <span data-i18n="filter_risk_lbl">Lọc Theo Rủi Ro:</span></label>
+                                <label><i class="fa-solid fa-filter"></i> <span data-i18n="filter_risk_lbl">Lọc Theo Rủi
+                                        Ro:</span></label>
                                 <select id="history-risk-filter" class="custom-select" style="max-width:200px;">
                                     <option value="all" data-i18n="opt_filter_all">Tất Cả Cấp Độ</option>
                                     <option value="safe" data-i18n="opt_filter_safe">🟢 An Toàn</option>
@@ -1436,7 +1777,9 @@
                             </div>
 
                             <div class="search-group">
-                                <input type="text" id="history-search-input" class="custom-input" placeholder="Tìm theo Mã phiên, mô hình..." data-i18n-placeholder="history_search_placeholder">
+                                <input type="text" id="history-search-input" class="custom-input"
+                                    placeholder="Tìm theo Mã phiên, mô hình..."
+                                    data-i18n-placeholder="history_search_placeholder">
                             </div>
                         </div>
 
@@ -1466,9 +1809,11 @@
                                 <i class="fa-solid fa-folder-open"></i>
                             </div>
                             <h4 data-i18n="hist_empty_title">Chưa Có Bản Ghi Kiểm Định Nào</h4>
-                            <p data-i18n="hist_empty_desc">Khi bạn thực hiện phân tích ảnh hoặc chụp từ camera, các bản ghi kiểm định kỹ thuật sẽ tự động được lưu trữ tại đây.</p>
+                            <p data-i18n="hist_empty_desc">Khi bạn thực hiện phân tích ảnh hoặc chụp từ camera, các bản
+                                ghi kiểm định kỹ thuật sẽ tự động được lưu trữ tại đây.</p>
                             <button id="btn-hist-go-analyze" class="btn-sample-modern mt-3">
-                                <i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="btn_hist_go_analyze">Bắt Đầu Phân Tích Ngay</span>
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> <span
+                                    data-i18n="btn_hist_go_analyze">Bắt Đầu Phân Tích Ngay</span>
                             </button>
                         </div>
                     </div>
@@ -1479,71 +1824,160 @@
                     <!-- 1. ACADEMIC HERO BANNER -->
                     <div class="about-hero-card glass-card">
                         <div class="about-hero-top-badge">
-                            <span class="iuh-badge"><i class="fa-solid fa-building-columns"></i> BỘ CÔNG THƯƠNG &bull; ĐẠI HỌC CÔNG NGHIỆP TP. HỒ CHÍ MINH (IUH)</span>
-                            <span class="major-badge"><i class="fa-solid fa-code"></i> KHOA CÔNG NGHỆ THÔNG TIN &bull; NGÀNH KHOA HỌC MÁY TÍNH</span>
+                            <span class="iuh-badge"><i class="fa-solid fa-building-columns"></i> BỘ CÔNG THƯƠNG &bull;
+                                ĐẠI HỌC CÔNG NGHIỆP TP. HỒ CHÍ MINH (IUH)</span>
+                            <span class="major-badge"><i class="fa-solid fa-code"></i> KHOA CÔNG NGHỆ THÔNG TIN &bull;
+                                NGÀNH KHOA HỌC MÁY TÍNH</span>
                         </div>
                         <div class="about-hero-body">
                             <div class="about-hero-text">
-                                <span class="thesis-label"><i class="fa-solid fa-graduation-cap"></i> BÁO CÁO KHÓA LUẬN TỐT NGHIỆP ĐẠI HỌC (2026)</span>
-                                <h1 class="about-hero-title">Phát Hiện Vết Nứt Bề Mặt Công Trình Bằng Mô Hình Phân Đoạn Ảnh</h1>
-                                <p class="about-hero-subtitle">Surface Crack Detection in Civil Structures Using Deep Learning Semantic Segmentation Models</p>
+                                <span class="thesis-label"><i class="fa-solid fa-graduation-cap"></i> BÁO CÁO KHÓA LUẬN
+                                    TỐT NGHIỆP ĐẠI HỌC (2026)</span>
+                                <h1 class="about-hero-title">Phát Hiện Vết Nứt Bề Mặt Công Trình Bằng Mô Hình Phân Đoạn
+                                    Ảnh</h1>
+                                <p class="about-hero-subtitle">Surface Crack Detection in Civil Structures Using Deep
+                                    Learning Semantic Segmentation Models</p>
                                 <p class="about-hero-lead">
-                                    Đề tài nghiên cứu ứng dụng trí tuệ nhân tạo và thị giác máy tính nhằm tự động hóa quy trình kiểm định an toàn kết cấu công trình xây dựng (cầu đường, hầm đập, công trình bê tông cốt thép). Hệ thống phân đoạn chính xác từng điểm ảnh khuyết tật vi nứt dưới 0.20mm, đo đạc định lượng diện tích hư hại thực tế và phân cấp nguy cơ rủi ro theo tiêu chuẩn kỹ thuật.
+                                    Đề tài nghiên cứu ứng dụng trí tuệ nhân tạo và thị giác máy tính nhằm tự động hóa
+                                    quy trình kiểm định an toàn kết cấu công trình xây dựng (cầu đường, hầm đập, công
+                                    trình bê tông cốt thép). Hệ thống phân đoạn chính xác từng điểm ảnh khuyết tật vi
+                                    nứt dưới 0.20mm, đo đạc định lượng diện tích hư hại thực tế và phân cấp nguy cơ rủi
+                                    ro theo tiêu chuẩn kỹ thuật.
                                 </p>
-                                
+
                                 <div class="about-meta-grid">
                                     <div class="about-meta-item">
-                                        <span class="meta-label"><i class="fa-solid fa-user-graduate"></i> Sinh Viên Thực Hiện:</span>
+                                        <span class="meta-label"><i class="fa-solid fa-user-graduate"></i> Sinh Viên
+                                            Thực Hiện:</span>
                                         <strong class="meta-val">Đỗ Văn Minh &bull; Đỗ Hoàng Minh</strong>
                                         <small class="meta-sub">Lớp Đại học Khoa học Máy tính (Khóa 2022 – 2026)</small>
                                     </div>
                                     <div class="about-meta-item">
-                                        <span class="meta-label"><i class="fa-solid fa-chalkboard-user"></i> Giảng Viên Hướng Dẫn:</span>
+                                        <span class="meta-label"><i class="fa-solid fa-chalkboard-user"></i> Giảng Viên
+                                            Hướng Dẫn:</span>
                                         <strong class="meta-val">TS. Đoàn Văn Thắng</strong>
-                                        <small class="meta-sub">Khoa Công nghệ Thông tin – Trường ĐH Công nghiệp TP.HCM</small>
+                                        <small class="meta-sub">Khoa Công nghệ Thông tin – Trường ĐH Công nghiệp
+                                            TP.HCM</small>
                                     </div>
                                     <div class="about-meta-item">
-                                        <span class="meta-label"><i class="fa-solid fa-laptop-code"></i> Nền Tảng Triển Khai:</span>
+                                        <span class="meta-label"><i class="fa-solid fa-laptop-code"></i> Nền Tảng Triển
+                                            Khai:</span>
                                         <strong class="meta-val">CrackVision Pro System</strong>
                                         <small class="meta-sub">FastAPI, PyTorch, SQL Server 2022, HTML5/CSS3</small>
                                     </div>
                                     <div class="about-meta-item">
-                                        <span class="meta-label"><i class="fa-solid fa-calendar-check"></i> Thời Gian Nghiệm Thu:</span>
+                                        <span class="meta-label"><i class="fa-solid fa-calendar-check"></i> Thời Gian
+                                            Nghiệm Thu:</span>
                                         <strong class="meta-val">Tháng 12 / 2026</strong>
                                         <small class="meta-sub">Hội đồng Đánh giá Khóa luận Tốt nghiệp IUH</small>
                                     </div>
                                 </div>
 
                                 <div class="about-hero-actions">
-                                    <button type="button" class="btn-about-action btn-about-primary" id="btn-about-go-dash">
+                                    <button type="button" class="btn-about-action btn-about-primary"
+                                        id="btn-about-go-dash">
                                         <i class="fa-solid fa-gauge-high"></i> <span>Xem Trung Tâm Dashboard</span>
                                     </button>
-                                    <button type="button" class="btn-about-action btn-about-secondary" id="btn-about-go-inspect">
-                                        <i class="fa-solid fa-wand-magic-sparkles"></i> <span>Thực Nghiệm Phân Tích Ảnh</span>
+                                    <button type="button" class="btn-about-action btn-about-secondary"
+                                        id="btn-about-go-inspect">
+                                        <i class="fa-solid fa-wand-magic-sparkles"></i> <span>Thực Nghiệm Phân Tích
+                                            Ảnh</span>
                                     </button>
-                                    <button type="button" class="btn-about-action btn-about-secondary" id="btn-about-go-bench">
+                                    <button type="button" class="btn-about-action btn-about-secondary"
+                                        id="btn-about-go-bench">
                                         <i class="fa-solid fa-chart-column"></i> <span>Đối Sánh Benchmark Mô Hình</span>
                                     </button>
                                 </div>
                             </div>
-                            
+
                             <div class="about-hero-crest">
                                 <div class="thesis-crest-box">
                                     <div class="crest-icon-wrap">
-                                        <svg viewBox="0 0 44 44" class="crest-svg" fill="none">
-                                            <rect width="44" height="44" rx="10" fill="#1D2430" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
-                                            <path d="M7 36 L17 23 L15 21 L25 18 L23 13 L36 7" stroke="#EF4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="bevel"/>
-                                            <path d="M7 36 L17 23 L15 21 L25 18 L23 13 L36 7" stroke="#FFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="bevel"/>
-                                            <circle cx="21" cy="20" r="3" fill="#EF4444" stroke="#FFF" stroke-width="1.2"/>
+                                        <svg viewBox="0 0 48 48" class="crest-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="crest_bg_grad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#171E2C" />
+                                                    <stop offset="1" stop-color="#0B0F17" />
+                                                </linearGradient>
+                                                <linearGradient id="crest_prism_top" x1="10" y1="6" x2="38" y2="24" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#3A475C" />
+                                                    <stop offset="1" stop-color="#202A3B" />
+                                                </linearGradient>
+                                                <linearGradient id="crest_prism_left" x1="10" y1="15" x2="24" y2="42" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#141C28" />
+                                                    <stop offset="1" stop-color="#0A0E17" />
+                                                </linearGradient>
+                                                <linearGradient id="crest_prism_right" x1="24" y1="24" x2="38" y2="42" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#243144" />
+                                                    <stop offset="1" stop-color="#121824" />
+                                                </linearGradient>
+                                                <linearGradient id="crest_laser_grad" x1="10" y1="36" x2="38" y2="10" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#EF4444" />
+                                                    <stop offset="0.5" stop-color="#FF5722" />
+                                                    <stop offset="1" stop-color="#F59E0B" />
+                                                </linearGradient>
+                                                <filter id="crestLaserGlow" x="-30%" y="-30%" width="160%" height="160%">
+                                                    <feGaussianBlur stdDeviation="2.2" result="blur" />
+                                                    <feMerge>
+                                                        <feMergeNode in="blur" />
+                                                        <feMergeNode in="SourceGraphic" />
+                                                    </feMerge>
+                                                </filter>
+                                            </defs>
+
+                                            <!-- Outer Titanium Bezel Base -->
+                                            <rect width="48" height="48" rx="12" fill="url(#crest_bg_grad)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" />
+
+                                            <!-- 3D Isometric Structural Concrete Prism -->
+                                            <polygon points="24,7 40,16 24,25 8,16" fill="url(#crest_prism_top)" />
+                                            <polygon points="8,16 24,25 24,41 8,32" fill="url(#crest_prism_left)" />
+                                            <polygon points="40,16 24,25 24,41 40,32" fill="url(#crest_prism_right)" />
+
+                                            <!-- Structural Facet Seams -->
+                                            <line x1="24" y1="7" x2="24" y2="25" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" />
+                                            <line x1="8" y1="16" x2="24" y2="25" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" />
+                                            <line x1="40" y1="16" x2="24" y2="25" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" />
+                                            <line x1="24" y1="25" x2="24" y2="41" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" />
+
+                                            <!-- Optical Aperture Reticle Rings -->
+                                            <circle cx="24" cy="24" r="9.5" stroke="rgba(0, 229, 255, 0.5)" stroke-width="1" stroke-dasharray="2.5 2" />
+                                            <circle cx="24" cy="24" r="14.5" stroke="rgba(255, 255, 255, 0.1)" stroke-width="0.8" />
+
+                                            <!-- Surgical Tectonic Laser Fracture Fissure -->
+                                            <path d="M 10 35 L 19 27 L 17 24 L 25 22 L 23 16 L 38 12" stroke="rgba(0,0,0,0.85)"
+                                                stroke-width="4.2" stroke-linecap="round" stroke-linejoin="bevel" />
+                                            <path d="M 10 35 L 19 27 L 17 24 L 25 22 L 23 16 L 38 12"
+                                                stroke="url(#crest_laser_grad)" stroke-width="2.8" stroke-linecap="round"
+                                                stroke-linejoin="bevel" filter="url(#crestLaserGlow)" />
+                                            <path d="M 10 35 L 19 27 L 17 24 L 25 22 L 23 16 L 38 12"
+                                                stroke="#FFFFFF" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="bevel" />
+
+                                            <!-- Branching Micro-Fissures -->
+                                            <path d="M 19 27 L 14 31" stroke="#F59E0B" stroke-width="1.3" stroke-linecap="round" />
+                                            <path d="M 25 22 L 31 26" stroke="#F59E0B" stroke-width="1.3" stroke-linecap="round" />
+
+                                            <!-- Optical AI Inspection Node -->
+                                            <circle cx="24" cy="22" r="3.4" fill="#EF4444" stroke="#FFFFFF" stroke-width="1.2" />
+                                            <circle cx="24" cy="22" r="5.8" stroke="#EF4444" stroke-width="0.8" opacity="0.6" />
+
+                                            <!-- CAD Corner Caliper Brackets -->
+                                            <path d="M 4 9 V 4 H 9" stroke="rgba(255,255,255,0.45)" stroke-width="1.2" stroke-linecap="round" />
+                                            <path d="M 44 9 V 4 H 39" stroke="rgba(255,255,255,0.45)" stroke-width="1.2" stroke-linecap="round" />
+                                            <path d="M 4 39 V 44 H 9" stroke="rgba(255,255,255,0.45)" stroke-width="1.2" stroke-linecap="round" />
+                                            <path d="M 44 39 V 44 H 39" stroke="rgba(255,255,255,0.45)" stroke-width="1.2" stroke-linecap="round" />
                                         </svg>
                                     </div>
                                     <h3 class="crest-title">CrackVision Pro</h3>
                                     <p class="crest-sub">Hệ Thống Kiểm Định Vết Nứt Kết Cấu Bê Tông AI</p>
                                     <div class="crest-badge-list">
-                                        <span class="crest-tag"><i class="fa-solid fa-check"></i> U-Net ResNet-34 SOTA</span>
-                                        <span class="crest-tag"><i class="fa-solid fa-check"></i> Độ phân giải 512×512 Native</span>
-                                        <span class="crest-tag"><i class="fa-solid fa-check"></i> Microsoft SQL Server 2022</span>
-                                        <span class="crest-tag"><i class="fa-solid fa-check"></i> TCVN 9343:2012 Compliance</span>
+                                        <span class="crest-tag"><i class="fa-solid fa-check"></i> U-Net ResNet-34
+                                            SOTA</span>
+                                        <span class="crest-tag"><i class="fa-solid fa-check"></i> Độ phân giải 512×512
+                                            Native</span>
+                                        <span class="crest-tag"><i class="fa-solid fa-check"></i> Microsoft SQL Server
+                                            2022</span>
+                                        <span class="crest-tag"><i class="fa-solid fa-check"></i> TCVN 9343:2012
+                                            Compliance</span>
                                     </div>
                                 </div>
                             </div>
@@ -1557,7 +1991,8 @@
                             <div class="stat-content">
                                 <span class="stat-number">11.298</span>
                                 <span class="stat-unit">Ảnh chuẩn hóa</span>
-                                <p class="stat-desc">Bộ dữ liệu thực nghiệm Kaggle Crack Segmentation Dataset tổng hợp từ 12 nguồn quốc tế chất lượng cao.</p>
+                                <p class="stat-desc">Bộ dữ liệu thực nghiệm Kaggle Crack Segmentation Dataset tổng hợp
+                                    từ 12 nguồn quốc tế chất lượng cao.</p>
                             </div>
                         </div>
                         <div class="about-stat-card card-glow-accent">
@@ -1565,7 +2000,8 @@
                             <div class="stat-content">
                                 <span class="stat-number">58.39%</span>
                                 <span class="stat-unit">Test mIoU Đỉnh Cao</span>
-                                <p class="stat-desc">Mô hình đề xuất U-Net ResNet-34 đạt độ chính xác phân đoạn vượt trội so với DeepLabV3+ (36.66%) và Sobel (22.40%).</p>
+                                <p class="stat-desc">Mô hình đề xuất U-Net ResNet-34 đạt độ chính xác phân đoạn vượt
+                                    trội so với DeepLabV3+ (36.66%) và Sobel (22.40%).</p>
                             </div>
                         </div>
                         <div class="about-stat-card card-glow-success">
@@ -1573,7 +2009,8 @@
                             <div class="stat-content">
                                 <span class="stat-number">73.36%</span>
                                 <span class="stat-unit">Điểm Dice F1-Score</span>
-                                <p class="stat-desc">Hàm mất mát hỗn hợp BCE + Dice Loss giải quyết triệt để vấn đề mất cân bằng dữ liệu cực đoan giữa nền và vết nứt.</p>
+                                <p class="stat-desc">Hàm mất mát hỗn hợp BCE + Dice Loss giải quyết triệt để vấn đề mất
+                                    cân bằng dữ liệu cực đoan giữa nền và vết nứt.</p>
                             </div>
                         </div>
                         <div class="about-stat-card card-glow-info">
@@ -1581,7 +2018,8 @@
                             <div class="stat-content">
                                 <span class="stat-number">34.5 FPS</span>
                                 <span class="stat-unit">Suy Luận Real-Time</span>
-                                <p class="stat-desc">Độ trễ suy luận chỉ 28.9 ms trên GPU NVIDIA CUDA, đáp ứng hoàn hảo tiêu chuẩn kiểm định video và camera trực tiếp.</p>
+                                <p class="stat-desc">Độ trễ suy luận chỉ 28.9 ms trên GPU NVIDIA CUDA, đáp ứng hoàn hảo
+                                    tiêu chuẩn kiểm định video và camera trực tiếp.</p>
                             </div>
                         </div>
                     </div>
@@ -1591,7 +2029,8 @@
                         <!-- Col Left: Motivation & Goals -->
                         <div class="about-col-card glass-card">
                             <div class="col-card-header">
-                                <div class="col-header-icon bg-warning-soft"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                                <div class="col-header-icon bg-warning-soft"><i
+                                        class="fa-solid fa-triangle-exclamation"></i></div>
                                 <div>
                                     <h3>Tính Cấp Thiết &amp; Mục Tiêu Đề Tài</h3>
                                     <p>Bối cảnh thực tiễn và lý do phát triển hệ thống kiểm định tự động</p>
@@ -1599,19 +2038,31 @@
                             </div>
                             <div class="col-card-body">
                                 <div class="about-callout">
-                                    <h4><i class="fa-solid fa-circle-question"></i> Thực Trạng Phương Pháp Truyền Thống:</h4>
+                                    <h4><i class="fa-solid fa-circle-question"></i> Thực Trạng Phương Pháp Truyền Thống:
+                                    </h4>
                                     <ul>
-                                        <li><b>Tốn kém &amp; Nguy hiểm:</b> Kiểm tra thủ công bằng mắt hoặc thang dây tại cầu cạn, đập thủy điện, cao ốc tiềm ẩn nguy cơ tai nạn lao động cao.</li>
-                                        <li><b>Chủ quan &amp; Thiếu định lượng:</b> Đánh giá phụ thuộc kinh nghiệm giám định viên, không đo đạc chính xác được diện tích hư hại (m²) và tốc độ lan rộng của vi nứt.</li>
-                                        <li><b>Bỏ sót vi nứt sớm:</b> Các vết nứt có bề rộng dưới 0.2mm rất khó phát hiện kịp thời bằng mắt thường nhưng lại là nguyên nhân gây ăn mòn cốt thép bên trong.</li>
+                                        <li><b>Tốn kém &amp; Nguy hiểm:</b> Kiểm tra thủ công bằng mắt hoặc thang dây
+                                            tại cầu cạn, đập thủy điện, cao ốc tiềm ẩn nguy cơ tai nạn lao động cao.
+                                        </li>
+                                        <li><b>Chủ quan &amp; Thiếu định lượng:</b> Đánh giá phụ thuộc kinh nghiệm giám
+                                            định viên, không đo đạc chính xác được diện tích hư hại (m²) và tốc độ lan
+                                            rộng của vi nứt.</li>
+                                        <li><b>Bỏ sót vi nứt sớm:</b> Các vết nứt có bề rộng dưới 0.2mm rất khó phát
+                                            hiện kịp thời bằng mắt thường nhưng lại là nguyên nhân gây ăn mòn cốt thép
+                                            bên trong.</li>
                                     </ul>
                                 </div>
                                 <div class="about-callout callout-success">
                                     <h4><i class="fa-solid fa-circle-check"></i> Mục Tiêu Cốt Lõi Của Luận Văn:</h4>
                                     <ul>
-                                        <li>Xây dựng quy trình xử lý ảnh và huấn luyện mô hình phân đoạn ngữ nghĩa nhị phân (Binary Semantic Segmentation) chuẩn mực.</li>
-                                        <li>Đề xuất kiến trúc <b>U-Net ResNet-34</b> ở độ phân giải <b>512×512 Native</b> nhằm bảo toàn nguyên vẹn nhánh nứt mảnh không bị đứt gãy.</li>
-                                        <li>Hiện thực hóa phần mềm ứng dụng hoàn chỉnh <b>CrackVision Pro</b>, kết nối trực tiếp cơ sở dữ liệu quan hệ doanh nghiệp <b>Microsoft SQL Server 2022</b> và hỗ trợ xuất báo cáo Audit PDF.</li>
+                                        <li>Xây dựng quy trình xử lý ảnh và huấn luyện mô hình phân đoạn ngữ nghĩa nhị
+                                            phân (Binary Semantic Segmentation) chuẩn mực.</li>
+                                        <li>Đề xuất kiến trúc <b>U-Net ResNet-34</b> ở độ phân giải <b>512×512
+                                                Native</b> nhằm bảo toàn nguyên vẹn nhánh nứt mảnh không bị đứt gãy.
+                                        </li>
+                                        <li>Hiện thực hóa phần mềm ứng dụng hoàn chỉnh <b>CrackVision Pro</b>, kết nối
+                                            trực tiếp cơ sở dữ liệu quan hệ doanh nghiệp <b>Microsoft SQL Server
+                                                2022</b> và hỗ trợ xuất báo cáo Audit PDF.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -1631,28 +2082,36 @@
                                     <span class="contrib-number">01</span>
                                     <div class="contrib-text">
                                         <h4>Chuẩn Hóa Bộ Dữ Liệu Lớn &amp; Khảo Sát Toàn Diện</h4>
-                                        <p>Xử lý, phân loại và chuẩn hóa 11.298 ảnh từ 12 nguồn quốc tế, thiết lập quy chuẩn đánh giá khách quan giữa phương pháp cổ điển (Sobel, Canny + Otsu) và học sâu (Compact U-Net, DeepLabV3+, U-Net ResNet-34).</p>
+                                        <p>Xử lý, phân loại và chuẩn hóa 11.298 ảnh từ 12 nguồn quốc tế, thiết lập quy
+                                            chuẩn đánh giá khách quan giữa phương pháp cổ điển (Sobel, Canny + Otsu) và
+                                            học sâu (Compact U-Net, DeepLabV3+, U-Net ResNet-34).</p>
                                     </div>
                                 </div>
                                 <div class="contribution-item">
                                     <span class="contrib-number">02</span>
                                     <div class="contrib-text">
                                         <h4>Đề Xuất Kiến Trúc U-Net ResNet-34 (512×512)</h4>
-                                        <p>Tận dụng trọng số tiền huấn luyện ImageNet và đường tắt Skip Connections trực tiếp. Mô hình đạt mIoU 58.39% và Dice 73.36%, vượt trội hoàn toàn DeepLabV3+ (36.66%) trong việc giữ chi tiết biên nứt mảnh.</p>
+                                        <p>Tận dụng trọng số tiền huấn luyện ImageNet và đường tắt Skip Connections trực
+                                            tiếp. Mô hình đạt mIoU 58.39% và Dice 73.36%, vượt trội hoàn toàn DeepLabV3+
+                                            (36.66%) trong việc giữ chi tiết biên nứt mảnh.</p>
                                     </div>
                                 </div>
                                 <div class="contribution-item">
                                     <span class="contrib-number">03</span>
                                     <div class="contrib-text">
                                         <h4>Chiến Lược Hàm Mất Mát Kết Hợp BCE + Dice Loss</h4>
-                                        <p>Giải quyết triệt để bài toán mất cân bằng lớp cực đoan khi điểm ảnh vết nứt chỉ chiếm 1% - 5% tổng bề mặt bê tông, đưa Recall nhận dạng vết nứt đạt 73.82% mà không làm bùng phát dương tính giả (False Positive).</p>
+                                        <p>Giải quyết triệt để bài toán mất cân bằng lớp cực đoan khi điểm ảnh vết nứt
+                                            chỉ chiếm 1% - 5% tổng bề mặt bê tông, đưa Recall nhận dạng vết nứt đạt
+                                            73.82% mà không làm bùng phát dương tính giả (False Positive).</p>
                                     </div>
                                 </div>
                                 <div class="contribution-item">
                                     <span class="contrib-number">04</span>
                                     <div class="contrib-text">
                                         <h4>Đóng Gói Ứng Dụng CrackVision Pro Hoàn Chỉnh</h4>
-                                        <p>Xây dựng hệ thống Client-Server công nghiệp (FastAPI + SQL Server 2022 SSMS + HTML5/CSS3/JS), hỗ trợ 3 luồng kiểm tra (Ảnh, Video, Camera), đo diện tích nứt (m²), phân cấp rủi ro TCVN và xuất báo cáo PDF chuẩn hóa.</p>
+                                        <p>Xây dựng hệ thống Client-Server công nghiệp (FastAPI + SQL Server 2022 SSMS +
+                                            HTML5/CSS3/JS), hỗ trợ 3 luồng kiểm tra (Ảnh, Video, Camera), đo diện tích
+                                            nứt (m²), phân cấp rủi ro TCVN và xuất báo cáo PDF chuẩn hóa.</p>
                                     </div>
                                 </div>
                             </div>
@@ -1662,36 +2121,45 @@
                     <!-- 4. RESEARCH & ENGINEERING PIPELINE -->
                     <div class="about-pipeline-card glass-card">
                         <div class="pipeline-header">
-                            <h3><i class="fa-solid fa-diagram-project text-accent"></i> Quy Trình Nghiên Cứu &amp; Luồng Xử Lý Hệ Thống CrackVision Pro</h3>
-                            <p>Từ thu thập dữ liệu thô hiện trường đến suy luận thời gian thực và quản trị cơ sở dữ liệu quan hệ</p>
+                            <h3><i class="fa-solid fa-diagram-project text-accent"></i> Quy Trình Nghiên Cứu &amp; Luồng
+                                Xử Lý Hệ Thống CrackVision Pro</h3>
+                            <p>Từ thu thập dữ liệu thô hiện trường đến suy luận thời gian thực và quản trị cơ sở dữ liệu
+                                quan hệ</p>
                         </div>
                         <div class="pipeline-steps-grid">
                             <div class="pipeline-step">
                                 <div class="step-badge">GIAI ĐOẠN 1</div>
                                 <div class="step-icon"><i class="fa-solid fa-camera-retro"></i></div>
                                 <h4>Thu Thập &amp; Tiền Xử Lý</h4>
-                                <p>11.298 ảnh bề mặt bê tông, phân tách nhị phân (Binary Mask 0/255), áp dụng Data Augmentation (Xoay, lật, co giãn, nhiễu sáng), chia tỉ lệ chuẩn 70% Train - 15% Val - 15% Test.</p>
+                                <p>11.298 ảnh bề mặt bê tông, phân tách nhị phân (Binary Mask 0/255), áp dụng Data
+                                    Augmentation (Xoay, lật, co giãn, nhiễu sáng), chia tỉ lệ chuẩn 70% Train - 15% Val
+                                    - 15% Test.</p>
                             </div>
                             <div class="pipeline-arrow"><i class="fa-solid fa-chevron-right"></i></div>
                             <div class="pipeline-step">
                                 <div class="step-badge">GIAI ĐOẠN 2</div>
                                 <div class="step-icon"><i class="fa-solid fa-brain"></i></div>
                                 <h4>Huấn Luyện AI Core</h4>
-                                <p>Huấn luyện mạng U-Net ResNet-34 Native 512×512 với hàm mất mát BCE + Dice Loss, tối ưu hóa bằng AdamW kết hợp bộ lập lịch giảm tốc độ học Cosine Annealing.</p>
+                                <p>Huấn luyện mạng U-Net ResNet-34 Native 512×512 với hàm mất mát BCE + Dice Loss, tối
+                                    ưu hóa bằng AdamW kết hợp bộ lập lịch giảm tốc độ học Cosine Annealing.</p>
                             </div>
                             <div class="pipeline-arrow"><i class="fa-solid fa-chevron-right"></i></div>
                             <div class="pipeline-step">
                                 <div class="step-badge">GIAI ĐOẠN 3</div>
                                 <div class="step-icon"><i class="fa-solid fa-calculator"></i></div>
                                 <h4>Đo Đạc &amp; Đánh Giá Rủi Ro</h4>
-                                <p>Tự động trích xuất ma trận điểm ảnh nứt, tính mật độ nứt (%), quy đổi diện tích hư hại thực tế (m²) theo hệ số bề mặt và phân cấp mức độ rủi ro theo TCVN 9343:2012.</p>
+                                <p>Tự động trích xuất ma trận điểm ảnh nứt, tính mật độ nứt (%), quy đổi diện tích hư
+                                    hại thực tế (m²) theo hệ số bề mặt và phân cấp mức độ rủi ro theo TCVN 9343:2012.
+                                </p>
                             </div>
                             <div class="pipeline-arrow"><i class="fa-solid fa-chevron-right"></i></div>
                             <div class="pipeline-step">
                                 <div class="step-badge">GIAI ĐOẠN 4</div>
                                 <div class="step-icon"><i class="fa-solid fa-server"></i></div>
                                 <h4>Lưu Trữ &amp; Xuất Báo Cáo</h4>
-                                <p>Đồng bộ dữ liệu hai chiều với Microsoft SQL Server 2022 (SSMS Ready) và bộ đệm SQLite, cung cấp API FastAPI và xuất tài liệu báo cáo kỹ thuật Audit PDF tự động.</p>
+                                <p>Đồng bộ dữ liệu hai chiều với Microsoft SQL Server 2022 (SSMS Ready) và bộ đệm
+                                    SQLite, cung cấp API FastAPI và xuất tài liệu báo cáo kỹ thuật Audit PDF tự động.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -1753,16 +2221,22 @@
                                         <td>53.65%</td>
                                         <td><b>89.63%</b></td>
                                         <td><span class="metric-badge">28.7 FPS</span></td>
-                                        <td>Recall vết nứt rất cao, tuy nhiên mô-đun ASPP làm mịn quá mức biên nứt mỏng.</td>
+                                        <td>Recall vết nứt rất cao, tuy nhiên mô-đun ASPP làm mịn quá mức biên nứt mỏng.
+                                        </td>
                                     </tr>
                                     <tr style="background: rgba(180, 67, 42, 0.12); font-weight: 700;">
-                                        <td style="color: var(--accent-primary);"><i class="fa-solid fa-crown"></i> <b>U-Net ResNet-34 (Đề xuất)</b></td>
+                                        <td style="color: var(--accent-primary);"><i class="fa-solid fa-crown"></i>
+                                            <b>U-Net ResNet-34 (Đề xuất)</b>
+                                        </td>
                                         <td><b>512 × 512</b></td>
                                         <td><span class="text-accent" style="font-size: 1.05rem;">58.39%</span></td>
                                         <td><span class="text-accent" style="font-size: 1.05rem;">73.36%</span></td>
                                         <td>73.82%</td>
-                                        <td><span class="metric-badge" style="background: var(--accent-primary); color: #fff;">34.5 FPS</span></td>
-                                        <td style="color: var(--accent-primary);"><b>Cân bằng xuất sắc giữa độ nét biên nứt tế vi, mIoU cao nhất và tốc độ thời gian thực.</b></td>
+                                        <td><span class="metric-badge"
+                                                style="background: var(--accent-primary); color: #fff;">34.5 FPS</span>
+                                        </td>
+                                        <td style="color: var(--accent-primary);"><b>Cân bằng xuất sắc giữa độ nét biên
+                                                nứt tế vi, mIoU cao nhất và tốc độ thời gian thực.</b></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1772,39 +2246,47 @@
                     <!-- 6. THESIS CHAPTER STRUCTURE (6 CHƯƠNG) -->
                     <div class="about-chapters-card glass-card">
                         <div class="chapters-header">
-                            <h3><i class="fa-solid fa-book-bookmark text-accent"></i> Bố Cục 6 Chương Của Báo Cáo Khóa Luận Tốt Nghiệp</h3>
-                            <p>Hệ thống hóa nội dung học thuật từ cơ sở lý thuyết đến kết quả thực nghiệm và ứng dụng triển khai</p>
+                            <h3><i class="fa-solid fa-book-bookmark text-accent"></i> Bố Cục 6 Chương Của Báo Cáo Khóa
+                                Luận Tốt Nghiệp</h3>
+                            <p>Hệ thống hóa nội dung học thuật từ cơ sở lý thuyết đến kết quả thực nghiệm và ứng dụng
+                                triển khai</p>
                         </div>
                         <div class="chapters-grid">
                             <div class="chapter-card">
                                 <div class="chap-num">CHƯƠNG 01</div>
                                 <h4>Giới Thiệu Đề Tài</h4>
-                                <p>Trình bày thực trạng kiểm định công trình, tính cấp thiết của bài toán, mục tiêu tổng quát, đối tượng và phạm vi nghiên cứu.</p>
+                                <p>Trình bày thực trạng kiểm định công trình, tính cấp thiết của bài toán, mục tiêu tổng
+                                    quát, đối tượng và phạm vi nghiên cứu.</p>
                             </div>
                             <div class="chapter-card">
                                 <div class="chap-num">CHƯƠNG 02</div>
                                 <h4>Cơ Sở Lý Thuyết</h4>
-                                <p>Tổng quan xử lý ảnh số, mạng tích chập CNN, cơ chế Skip Connections trong U-Net, Residual Learning và kiến trúc DeepLabV3+.</p>
+                                <p>Tổng quan xử lý ảnh số, mạng tích chập CNN, cơ chế Skip Connections trong U-Net,
+                                    Residual Learning và kiến trúc DeepLabV3+.</p>
                             </div>
                             <div class="chapter-card">
                                 <div class="chap-num">CHƯƠNG 03</div>
                                 <h4>Phương Pháp &amp; Thiết Kế</h4>
-                                <p>Quy trình thu thập 11.298 ảnh từ 12 nguồn, chiến lược Data Augmentation, kiến trúc Encoder-Decoder và hàm mất mát kết hợp BCE + Dice.</p>
+                                <p>Quy trình thu thập 11.298 ảnh từ 12 nguồn, chiến lược Data Augmentation, kiến trúc
+                                    Encoder-Decoder và hàm mất mát kết hợp BCE + Dice.</p>
                             </div>
                             <div class="chapter-card">
                                 <div class="chap-num">CHƯƠNG 04</div>
                                 <h4>Kết Quả &amp; Đánh Giá</h4>
-                                <p>Phân tích đường cong huấn luyện Loss/IoU, đối sánh định lượng 5 mô hình trên 1.695 ảnh Test, nghiên cứu Ablation Study chi tiết.</p>
+                                <p>Phân tích đường cong huấn luyện Loss/IoU, đối sánh định lượng 5 mô hình trên 1.695
+                                    ảnh Test, nghiên cứu Ablation Study chi tiết.</p>
                             </div>
                             <div class="chapter-card">
                                 <div class="chap-num">CHƯƠNG 05</div>
                                 <h4>Xây Dựng Ứng Dụng</h4>
-                                <p>Thiết kế hệ thống CrackVision Pro (FastAPI + SQL Server 2022), giao diện đa chế độ (Ảnh, Video, Camera), xuất báo cáo PDF tự động.</p>
+                                <p>Thiết kế hệ thống CrackVision Pro (FastAPI + SQL Server 2022), giao diện đa chế độ
+                                    (Ảnh, Video, Camera), xuất báo cáo PDF tự động.</p>
                             </div>
                             <div class="chapter-card">
                                 <div class="chap-num">CHƯƠNG 06</div>
                                 <h4>Kết Luận &amp; Hướng Đi</h4>
-                                <p>Tổng kết các đóng góp then chốt của đề tài, các hạn chế còn tồn tại và định hướng tích hợp trên thiết bị bay không người lái (UAV/Drone).</p>
+                                <p>Tổng kết các đóng góp then chốt của đề tài, các hạn chế còn tồn tại và định hướng
+                                    tích hợp trên thiết bị bay không người lái (UAV/Drone).</p>
                             </div>
                         </div>
                     </div>
@@ -1813,7 +2295,8 @@
                     <div class="about-team-card glass-card">
                         <div class="team-header">
                             <h3><i class="fa-solid fa-users text-accent"></i> Nhóm Tác Giả &amp; Lời Cảm Ơn</h3>
-                            <p>Khóa luận tốt nghiệp chuyên ngành Khoa học Máy tính &bull; Đại học Công nghiệp TP. Hồ Chí Minh (IUH)</p>
+                            <p>Khóa luận tốt nghiệp chuyên ngành Khoa học Máy tính &bull; Đại học Công nghiệp TP. Hồ Chí
+                                Minh (IUH)</p>
                         </div>
                         <div class="team-grid">
                             <div class="team-member-card">
@@ -1821,7 +2304,8 @@
                                 <div class="member-info">
                                     <h4>Đỗ Văn Minh</h4>
                                     <span class="member-role">Sinh viên thực hiện đề tài</span>
-                                    <p>Chuyên ngành: Khoa học máy tính &bull; Khoa Công nghệ Thông tin &bull; Đại học Công nghiệp TP.HCM</p>
+                                    <p>Chuyên ngành: Khoa học máy tính &bull; Khoa Công nghệ Thông tin &bull; Đại học
+                                        Công nghiệp TP.HCM</p>
                                 </div>
                             </div>
                             <div class="team-member-card">
@@ -1829,20 +2313,28 @@
                                 <div class="member-info">
                                     <h4>Đỗ Hoàng Minh</h4>
                                     <span class="member-role">Sinh viên thực hiện đề tài</span>
-                                    <p>Chuyên ngành: Khoa học máy tính &bull; Khoa Công nghệ Thông tin &bull; Đại học Công nghiệp TP.HCM</p>
+                                    <p>Chuyên ngành: Khoa học máy tính &bull; Khoa Công nghệ Thông tin &bull; Đại học
+                                        Công nghiệp TP.HCM</p>
                                 </div>
                             </div>
                             <div class="team-member-card instructor-card">
-                                <div class="member-avatar avatar-instructor"><i class="fa-solid fa-user-graduate"></i></div>
+                                <div class="member-avatar avatar-instructor"><i class="fa-solid fa-user-graduate"></i>
+                                </div>
                                 <div class="member-info">
                                     <h4>TS. Đoàn Văn Thắng</h4>
                                     <span class="member-role text-accent">Giảng viên hướng dẫn</span>
-                                    <p>Cán bộ hướng dẫn khoa học &bull; Khoa Công nghệ Thông tin &bull; Trường Đại học Công nghiệp TP.HCM</p>
+                                    <p>Cán bộ hướng dẫn khoa học &bull; Khoa Công nghệ Thông tin &bull; Trường Đại học
+                                        Công nghiệp TP.HCM</p>
                                 </div>
                             </div>
                         </div>
                         <div class="team-ack-box">
-                            <p><i class="fa-solid fa-quote-left"></i> Nhóm tác giả xin bày tỏ lòng biết ơn chân thành sâu sắc đến <b>Ban Giám hiệu Trường Đại học Công nghiệp TP. Hồ Chí Minh</b>, quý Thầy Cô <b>Khoa Công nghệ Thông tin</b>, và đặc biệt là <b>TS. Đoàn Văn Thắng</b> đã tận tình hướng dẫn, truyền đạt tri thức và tạo mọi điều kiện thuận lợi nhất để nhóm hoàn thành xuất sắc khóa luận này. <i class="fa-solid fa-quote-right"></i></p>
+                            <p><i class="fa-solid fa-quote-left"></i> Nhóm tác giả xin bày tỏ lòng biết ơn chân thành
+                                sâu sắc đến <b>Ban Giám hiệu Trường Đại học Công nghiệp TP. Hồ Chí Minh</b>, quý Thầy Cô
+                                <b>Khoa Công nghệ Thông tin</b>, và đặc biệt là <b>TS. Đoàn Văn Thắng</b> đã tận tình
+                                hướng dẫn, truyền đạt tri thức và tạo mọi điều kiện thuận lợi nhất để nhóm hoàn thành
+                                xuất sắc khóa luận này. <i class="fa-solid fa-quote-right"></i>
+                            </p>
                         </div>
                     </div>
                 </section>
@@ -1850,6 +2342,7 @@
         </div>
     </div>
 
-    <script src="script.js?v=4.8"></script>
+    <script src="script.js?v=13.0"></script>
 </body>
+
 </html>

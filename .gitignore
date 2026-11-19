@@ -41,3 +41,18 @@ video_crack/2048289-uhd_3840_2160_30fps.mp4
 *.pptx
 *.xlsx
 *.doc
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
+# Academic research drafts & professor review documents
+BaibaoSSRC_DoVanMinh_DoHoangminh/
+GiangvienFixed/
+
+# Pytest cache
+.pytest_cache/

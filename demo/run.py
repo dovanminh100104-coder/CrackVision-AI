@@ -30,18 +30,33 @@ def free_port(port):
     except Exception:
         pass
 
+def is_domain_configured(domain="crackvision.ai"):
+    try:
+        ip = socket.gethostbyname(domain)
+        return ip.startswith("127.")
+    except Exception:
+        return False
+
 def open_browser_when_ready(port_80_active):
     time.sleep(1.8)
-    target_url = "http://crackvision.ai" if port_80_active else "http://crackvision.ai:8000"
+    domain_ok = is_domain_configured("crackvision.ai")
+    if domain_ok:
+        target_url = "http://crackvision.ai" if port_80_active else "http://crackvision.ai:8000"
+    else:
+        target_url = "http://localhost:8000"
     backup_url = "http://localhost:8000"
 
     print(f"\n[TRINH DUYET] Dang tu dong mo: {target_url}", flush=True)
-    print(f"[CHU Y] Neu trinh duyet chan Webcam tren ten mien rieng, ban chi can mo: {backup_url}\n", flush=True)
+    if not domain_ok:
+        print("[LƯU Ý] Chưa kích hoạt tên miền ảo, đang chạy trên: http://localhost:8000", flush=True)
+        print("        Để dùng tên miền http://crackvision.ai, chạy setup_domain.bat với quyền Admin.\n", flush=True)
+    else:
+        print(f"[CHU Y] Neu trinh duyet chan Webcam tren ten mien rieng, ban chi can mo: {backup_url}\n", flush=True)
     try:
         import subprocess
         # Su dung user-data-dir rieng de Chrome ap dung co bao mat bat Webcam cho ten mien rieng ke ca khi Chrome dang bat
         temp_profile = os.path.join(os.environ.get("TEMP", "C:\\Temp"), "crackvision_chrome")
-        cmd = f'start "" chrome --user-data-dir="{temp_profile}" --unsafely-treat-insecure-origin-as-secure="http://crackvision.ai,http://crackvision.ai:8000" "{target_url}"'
+        cmd = f'start "" chrome --user-data-dir="{temp_profile}" --unsafely-treat-insecure-origin-as-secure="http://crackvision.ai,http://crackvision.ai:8000,http://localhost:8000" "{target_url}"'
         subprocess.run(cmd, shell=True)
     except Exception:
         webbrowser.open(target_url)

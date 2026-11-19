@@ -3,6 +3,11 @@ title AI CrackVision Pro - May Chu AI (crackvision.ai)
 color 0A
 cd /d "%~dp0"
 
+:: Dam bao uu tien Python da cai dat thay vi WindowsApps stub
+if exist "%LOCALAPPDATA%\Programs\Python\Python311\python.exe" (
+    set "PATH=%LOCALAPPDATA%\Programs\Python\Python311\;%LOCALAPPDATA%\Programs\Python\Python311\Scripts\;%PATH%"
+)
+
 echo ========================================================================
 echo        AI CRACKVISION PRO - SURFACE CRACK INSPECTION SYSTEM
 echo ========================================================================

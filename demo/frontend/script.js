@@ -736,6 +736,11 @@ document.addEventListener('DOMContentLoaded', () => {
             tabContents.forEach(c => c.classList.remove('active'));
 
             btn.classList.add('active');
+            // Auto scroll active tab into view so it is never clipped
+            try {
+                btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            } catch (e) { }
+
             const targetTab = document.getElementById(btn.dataset.tab);
             if (targetTab) {
                 targetTab.classList.add('active');
@@ -762,6 +767,54 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Horizontal scrollbar controls & wheel scrolling for Nav Tabs (View all tabs without text clipping)
+    const navTabsContainer = document.querySelector('.nav-tabs');
+    const scrollLeftBtn = document.getElementById('nav-scroll-left');
+    const scrollRightBtn = document.getElementById('nav-scroll-right');
+
+    if (navTabsContainer) {
+        // Smooth mouse wheel horizontal scrolling
+        navTabsContainer.addEventListener('wheel', (e) => {
+            if (e.deltaY !== 0) {
+                e.preventDefault();
+                navTabsContainer.scrollLeft += e.deltaY * 0.95;
+            }
+        }, { passive: false });
+
+        // Update scroll arrow visibility & affordance
+        const updateScrollButtons = () => {
+            if (!scrollLeftBtn || !scrollRightBtn) return;
+            const maxScrollLeft = navTabsContainer.scrollWidth - navTabsContainer.clientWidth - 4;
+            const canScroll = navTabsContainer.scrollWidth > navTabsContainer.clientWidth;
+            if (!canScroll) {
+                scrollLeftBtn.style.display = 'none';
+                scrollRightBtn.style.display = 'none';
+            } else {
+                scrollLeftBtn.style.display = 'inline-flex';
+                scrollRightBtn.style.display = 'inline-flex';
+                scrollLeftBtn.style.opacity = navTabsContainer.scrollLeft > 10 ? '1' : '0.35';
+                scrollLeftBtn.style.pointerEvents = navTabsContainer.scrollLeft > 10 ? 'auto' : 'none';
+                scrollRightBtn.style.opacity = navTabsContainer.scrollLeft < maxScrollLeft ? '1' : '0.35';
+                scrollRightBtn.style.pointerEvents = navTabsContainer.scrollLeft < maxScrollLeft ? 'auto' : 'none';
+            }
+        };
+
+        navTabsContainer.addEventListener('scroll', updateScrollButtons, { passive: true });
+        window.addEventListener('resize', updateScrollButtons);
+        setTimeout(updateScrollButtons, 250);
+
+        if (scrollLeftBtn) {
+            scrollLeftBtn.addEventListener('click', () => {
+                navTabsContainer.scrollBy({ left: -220, behavior: 'smooth' });
+            });
+        }
+        if (scrollRightBtn) {
+            scrollRightBtn.addEventListener('click', () => {
+                navTabsContainer.scrollBy({ left: 220, behavior: 'smooth' });
+            });
+        }
+    }
 
     // About tab quick navigation buttons
     const btnAboutGoDash = document.getElementById('btn-about-go-dash');
@@ -892,7 +945,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateActiveModelUI() {
         const isClassical = (algorithmGroupSelect && algorithmGroupSelect.value === 'classical');
-        const activeKey = isClassical 
+        const activeKey = isClassical
             ? (classicalTypeSelect ? classicalTypeSelect.value : 'sobel')
             : (modelTypeSelect ? modelTypeSelect.value : 'unet_resnet34_512');
 
@@ -970,12 +1023,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             updateActiveModelUI();
+            if (typeof clearVideoAiCache === 'function') clearVideoAiCache();
         });
     }
 
     if (classicalTypeSelect) {
         classicalTypeSelect.addEventListener('change', () => {
             updateActiveModelUI();
+            if (typeof clearVideoAiCache === 'function') clearVideoAiCache();
         });
     }
 
@@ -1543,7 +1598,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================================================
-    // REAL-TIME VIDEO PROCESSING ENGINE
+    // REAL-TIME VIDEO PROCESSING ENGINE (FULL RESOLUTION AI OVERLAY)
     // =========================================================================
     const videoFileInput = document.getElementById('video-file-input');
     const btnSampleVideo = document.getElementById('btn-sample-video');
@@ -1738,7 +1793,7 @@ document.addEventListener('DOMContentLoaded', () => {
             c.height = videoPlayer.videoHeight || 480;
             const ctx = c.getContext('2d');
             ctx.drawImage(videoPlayer, 0, 0, c.width, c.height);
-            try { origB64 = c.toDataURL('image/jpeg', 0.85); } catch (e) {}
+            try { origB64 = c.toDataURL('image/jpeg', 0.85); } catch (e) { }
         }
         if (!origB64) return;
 
@@ -2064,7 +2119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = 'high';
         ctx.drawImage(webcamVideo, 0, 0, targetW, targetH);
-        try { lastCameraOrigB64 = cameraFrameCanvas.toDataURL('image/jpeg', 0.90); } catch (e) {}
+        try { lastCameraOrigB64 = cameraFrameCanvas.toDataURL('image/jpeg', 0.90); } catch (e) { }
 
         isSendingCameraFrame = true;
         cameraFrameCanvas.toBlob(async (blob) => {
@@ -2169,7 +2224,7 @@ document.addEventListener('DOMContentLoaded', () => {
             c.height = webcamVideo.videoHeight || 480;
             const ctx = c.getContext('2d');
             ctx.drawImage(webcamVideo, 0, 0, c.width, c.height);
-            try { origB64 = c.toDataURL('image/jpeg', 0.85); } catch (e) {}
+            try { origB64 = c.toDataURL('image/jpeg', 0.85); } catch (e) { }
         }
         if (!origB64) return;
 
@@ -2672,7 +2727,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         hour: '2-digit', minute: '2-digit', second: '2-digit'
                     });
                 }
-            } catch (e) {}
+            } catch (e) { }
 
             const displayRisk = getLocalizedRisk(item.risk_level || 'N/A', currentLang);
             const origThumb = item.orig_base64 || '';
@@ -2930,7 +2985,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const progress = Math.min(elapsed / duration, 1);
             const easeProgress = 1 - Math.pow(1 - progress, 3);
             const current = start + (target - start) * easeProgress;
-            
+
             el.textContent = current.toFixed(decimals) + suffix;
 
             if (progress < 1) {
@@ -2967,7 +3022,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ]);
                 const dbStats = dbRes.database || {};
                 const records = histRes.records || [];
-                
+
                 const lightRecent = records.slice(0, 6).map(r => ({
                     id: r.id,
                     source_type: r.source_type || 'image',
@@ -3379,7 +3434,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         recentItems.slice(0, 5).forEach(item => {
             const tr = document.createElement('tr');
-            
+
             let srcBadge = '<span class="badge-source"><i class="fa-solid fa-image"></i> Ảnh</span>';
             if (item.source_type === 'video') {
                 srcBadge = '<span class="badge-source"><i class="fa-solid fa-video"></i> Video</span>';
